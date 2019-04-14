@@ -22,7 +22,10 @@ export default class OpeningScreen extends Component {
                 </Text>
             </View>
             <View style= {{flex: 0.5, justifyContent: 'space-evenly', }}>
-                <TouchableOpacity activeOpacity={0.5} style={styles.button}>
+                <TouchableOpacity 
+                activeOpacity={0.5} 
+                style={styles.button}
+                >
                     <Text style={styles.buttontext}>Login</Text>
                 </TouchableOpacity>
                 <TouchableOpacity 
@@ -44,7 +47,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#244882",
     padding: 10,
     alignSelf: "center",
-    width: Dimensions.get("window").width / 2
+    width: Dimensions.get("window").width/2,
+    borderRadius: 20
   },
 
   buttontext: {

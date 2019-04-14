@@ -8,6 +8,7 @@ import SignUpAs from './components/SignUpAs.js';
 import HelperEmail from './components/HelperEmail.js'
 import HelperCode from "./components/HelperCode.js";
 import HelperSignUp from './components/HelperSignUp.js';
+import SeekerSignUp from './components/SeekerSignUp.js';
 
 const RootStack = createStackNavigator(
   {
@@ -26,6 +27,10 @@ const RootStack = createStackNavigator(
     Helpersignup : {
       screen: HelperSignUp
     },
+    
+    Seekersignup : {
+      screen: SeekerSignUp
+    }
   },
   {
     initialRouteName: "Opening",

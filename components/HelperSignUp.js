@@ -22,6 +22,7 @@ export default class HelperSignUp extends Component {
     render() {
         return (
           <ScrollView contentContainerStyle={styles.viewstyle}>
+            
             <View style={styles.HeaderStyle}>
               <View style={styles.logostyle}>
                 <Text style={styles.textstyle}>Talk It Out</Text>
@@ -30,6 +31,7 @@ export default class HelperSignUp extends Component {
                 <Text style={styles.HMStyle}>Helper</Text>
               </View>
             </View>
+            
             <ScrollView contentContainerStyle={styles.scrollstyle}>
                 <View style={styles.inputlayout}>
                     <TextInput
@@ -90,7 +92,6 @@ export default class HelperSignUp extends Component {
                         dateInput: {
                             marginLeft: 36
                         }
-                        // ... You can check the source to find the other keys.
                     }}
                     onDateChange={(date) => { this.setState({ date: date }) }}
                 />
@@ -162,9 +163,7 @@ styles = StyleSheet.create({
     },
 
     inputlayout: {
-        // backgroundColor: 'blue',
         justifyContent: 'center',
-        // backgroundColor: 'red',
         padding: 20
     },
 

@@ -28,7 +28,9 @@ export default class SignUpAs extends Component {
                   <Text style={styles.message}>Looking for someone to talk to? This ones for you</Text>
                     <TouchableOpacity 
                     style={styles.button} 
-                    activeOpacity={0.5}>
+                    activeOpacity={0.5}
+                    onPress={() => this.props.navigation.navigate('Seekersignup')}
+                    >
                         <Text style={styles.buttontext}>Seeker</Text> 
                     </TouchableOpacity>
               </View>
@@ -55,7 +57,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#244882",
     padding: 10,
     alignSelf: "center",
-    width: Dimensions.get("window").width / 2.5
+    width: Dimensions.get("window").width / 2.5,
+    borderRadius: 20
   },
 
   buttontext: {

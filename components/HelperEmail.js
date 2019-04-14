@@ -10,13 +10,33 @@ import {
     KeyboardAvoidingView
 } from 'react-native';
 import RF from "react-native-responsive-fontsize";
+import * as firebase from 'firebase';
 
 
 export default class HelperEmail extends Component {
     
+    componentWillMount() {
+      const firebaseConfig = {
+        apiKey: 'AIzaSyC8S1ImpMV_LohWmUiOAN6JctQPWw2KMZg',
+        authDomain: 'talkitout-123.firebaseapp.com'
+      }
+
+      firebase.initializeApp(firebaseConfig);
+    }
+
     constructor(props) {
       super(props);
-      this.state = {email: ''}
+      this.state = {
+        email: '',
+        // authenticating: false
+      }
+    }
+
+    verify = () => {
+      if (this.state.email.substr(-12, 12) != '@lums.edu.pk')
+      {
+        alert('please enter your LUMS email')
+      }
     }
 
     render() {
@@ -63,7 +83,7 @@ export default class HelperEmail extends Component {
                     style={styles.button}
                     activeOpacity={0.5}
                     // onPress={() => this.props.navigation.navigate('HelperVerification')}
-                    onPress={() => console.log(this.state.email)}
+                    onPress={this.verify}
                     >
                         <Text style={styles.buttontext}>Send Code</Text>
                     </TouchableOpacity>
