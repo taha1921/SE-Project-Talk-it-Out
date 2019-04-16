@@ -51,7 +51,7 @@ export default class LoginHelper extends Component {
                     style={styles.input}
                     placeholder="Password"
                     returnKeyType="go"
-                    keyboardType="visible-password"
+                    keyboardType="default"
                     // password={true}
                     secureTextEntry={true}
                     autoCapitalize="none"
