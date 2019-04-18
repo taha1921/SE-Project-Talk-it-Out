@@ -9,6 +9,8 @@ import HelperEmail from './components/HelperEmail.js'
 import HelperCode from "./components/HelperCode.js";
 import HelperSignUp from './components/HelperSignUp.js';
 import SeekerSignUp from './components/SeekerSignUp.js';
+import LoginAs from "./components/LoginAs.js";
+import LoginHelper from "./components/LoginHelper.js";
 
 const RootStack = createStackNavigator(
   {
@@ -30,6 +32,14 @@ const RootStack = createStackNavigator(
     
     Seekersignup : {
       screen: SeekerSignUp
+    },
+
+    LoginScreen: {
+      screen: LoginAs
+    },
+
+    HelperLogin: {
+      screen: LoginHelper
     }
   },
   {

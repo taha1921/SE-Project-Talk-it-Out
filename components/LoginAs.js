@@ -7,15 +7,12 @@ import {
     TouchableOpacity,
     Dimensions
 } from 'react-native';
-// import { Directions } from 'react-native-gesture-handler';
-
 
 export default class LoginAs extends Component {
 
     render() {
         return (
           <View style={styles.viewstyle}>
-            {/* <View style={{flex: 0.9}}> */}
               <View style={styles.HeaderStyle}>
                 <View style={styles.logostyle}>
                   <Text style={styles.textstyle}>Talk It Out</Text>
@@ -44,10 +41,6 @@ export default class LoginAs extends Component {
                 </View>
              
               </View>
-              
-              
-            {/* </View> */}
-            {/* <View style={{flex:0.2}}></View> */}
           </View>
         );
     }
@@ -57,10 +50,11 @@ const styles = StyleSheet.create({
   button: {
     fontFamily: "Poppins",
     alignItems: "center",
-        backgroundColor: "#244882",
+    backgroundColor: "#244882",
     padding: 10,
     alignSelf: "center",
-    width: Dimensions.get("window").width / 2.5
+    width: Dimensions.get("window").width / 2.5,
+    borderRadius: 20
   },
 
   buttontext: {
@@ -125,4 +119,4 @@ const styles = StyleSheet.create({
   }
 });
 
-//AppRegistry.registerComponent("SignUpAs", () => SignUpAs)
+AppRegistry.registerComponent("LoginAs", () => LoginAs)
