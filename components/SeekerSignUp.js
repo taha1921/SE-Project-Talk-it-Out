@@ -13,7 +13,11 @@ import RF from "react-native-responsive-fontsize";
 import * as firebase from "firebase";
 
 export default class SeekerSignUp extends Component {
-    
+  
+    static navigationOptions = {
+      title: 'Seeker Sign Up',
+    }
+
     constructor(props) {
         super(props);
         this.state = {

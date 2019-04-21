@@ -9,11 +9,14 @@ import {
     TextInput,
     KeyboardAvoidingView
 } from 'react-native';
-// import { Directions } from 'react-native-gesture-handler';
-
+import RF from "react-native-responsive-fontsize";
 
 export default class LoginHelper extends Component {
-    
+  
+  static navigationOptions = {
+    title: 'Helper Login',
+  }
+
     render() {
         return (
           <KeyboardAvoidingView behavior="height" style={styles.viewstyle}>
@@ -25,14 +28,18 @@ export default class LoginHelper extends Component {
                     <Text style={styles.HMStyle}>Login</Text>
                 </View>
             </View>
+            
             <View style={styles.Title}>
+                
                 <View style={styles.EmailPosition}>
                     <Text style={styles.TitleStyle}>Helper</Text>
                 </View>
+                
                 <View style={styles.info}>
                     <Text style={styles.message}>Email Address</Text>
                 </View>
-                <View style = {{flex: 0.9, justifyContent: "space-evenly"}}>
+                
+              <View style = {{flex: 0.9, justifyContent: "space-evenly"}}>
                 <View style={styles.inputlayout}>
                     <TextInput 
                     style={styles.input}
@@ -68,8 +75,8 @@ export default class LoginHelper extends Component {
                     </TouchableOpacity>
                 </View>
 
-                </View>
               </View>
+            </View>
           </KeyboardAvoidingView>
         );
     }
@@ -82,7 +89,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#244882",
     padding: 10,
     alignSelf: "center",
-    width: Dimensions.get("window").width / 2.5
+    width: Dimensions.get("window").width / 2.5,
+    borderRadius: 20
   },
 
   buttontext: {
@@ -99,7 +107,8 @@ const styles = StyleSheet.create({
 
   logostyle: {
     flex: 0.3,
-    justifyContent: "flex-start"
+    justifyContent: "flex-start",
+    backgroundColor: 'purple'
   },
 
   Headermessage: {
@@ -110,7 +119,7 @@ const styles = StyleSheet.create({
 
   HMStyle: {
     fontFamily: "Poppins",
-    fontSize: 30,
+    fontSize: RF(4.5),
     color: "#158ec1"
   },
 
@@ -118,7 +127,6 @@ const styles = StyleSheet.create({
     flex: 0.1,
     flexDirection: "column",
     justifyContent: "space-between",
-    // backgroundColor: "purple"
   },
 
   viewstyle: {
@@ -136,14 +144,14 @@ const styles = StyleSheet.create({
   },
 
   Title: {
-    flex: 0.6,
-    // backgroundColor: "green",
+    flex: 0.77,
+    backgroundColor: "green",
     flexDirection: 'column'
   },
 
   EmailPosition: {
-    flex: 0.3,
-    // backgroundColor: "brown",
+    flex: 0.13,
+    backgroundColor: "brown",
     justifyContent: 'center'
   },
 
@@ -157,14 +165,14 @@ const styles = StyleSheet.create({
   info: {
     flex: 0.20,
     alignSelf: 'center',
-    marginLeft: 15,
+    // marginLeft: 15,
     // alignContent: 'center'
-    // backgroundColor: 'red'
+    backgroundColor: 'red'
   },
 
   inputlayout: {
     flex: 0,
-    // backgroundColor: 'blue',
+    backgroundColor: 'blue',
     justifyContent: 'center',
     padding: 20
   },
@@ -177,8 +185,8 @@ const styles = StyleSheet.create({
   },
 
   submitbutton: {
-      flex: 0.15,
-    //   backgroundColor: 'pink',
+      flex: 0.1,
+      backgroundColor: 'pink',
     //   justifyContent: 'center'
   }
 

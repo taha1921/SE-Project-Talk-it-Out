@@ -14,6 +14,10 @@ import DatePicker from "react-native-datepicker";
 
 export default class HelperSignUp extends Component {
     
+    static navigationOptions = {
+        title: 'Helper Sign Up',
+    }
+    
     constructor(props) {
         super(props)
         this.state = { date: "2016-05-15" }
