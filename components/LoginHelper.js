@@ -19,27 +19,22 @@ export default class LoginHelper extends Component {
 
     render() {
         return (
-          <KeyboardAvoidingView behavior="height" style={styles.viewstyle}>
+          <View style={styles.viewstyle}>
             <View style={styles.HeaderStyle}>
                 <View style={styles.logostyle}>
                     <Text style={styles.textstyle}>Talk It Out</Text>
                 </View>
                 <View style={styles.Headermessage}>
-                    <Text style={styles.HMStyle}>Login</Text>
+                    <Text style={styles.HMStyle}>Helper</Text>
                 </View>
             </View>
             
             <View style={styles.Title}>
-                
-                <View style={styles.EmailPosition}>
-                    <Text style={styles.TitleStyle}>Helper</Text>
-                </View>
-                
+       
                 <View style={styles.info}>
                     <Text style={styles.message}>Email Address</Text>
                 </View>
-                
-              <View style = {{flex: 0.9, justifyContent: "space-evenly"}}>
+ 
                 <View style={styles.inputlayout}>
                     <TextInput 
                     style={styles.input}
@@ -48,7 +43,7 @@ export default class LoginHelper extends Component {
                     keyboardType="email-address"
                     autoCapitalize="none"
                     autoCorrect={false}
-                    placeholderTextColor='rgba(255,255,255,0.2)'/>
+                    placeholderTextColor='rgba(255,255,255,0.5)'/>
                 </View>
                 <View style={styles.info}>
                     <Text style={styles.message}>Password</Text>
@@ -63,7 +58,7 @@ export default class LoginHelper extends Component {
                     secureTextEntry={true}
                     autoCapitalize="none"
                     autoCorrect={false}
-                    placeholderTextColor='rgba(255,255,255,0.2)'/>
+                    placeholderTextColor='rgba(255,255,255,0.5)'/>
                 </View>
                 <View style={styles.submitbutton}>
                     <TouchableOpacity style={styles.button}
@@ -75,9 +70,9 @@ export default class LoginHelper extends Component {
                     </TouchableOpacity>
                 </View>
 
-              </View>
+              {/* </View> */}
             </View>
-          </KeyboardAvoidingView>
+          </View>
         );
     }
 }
@@ -108,7 +103,7 @@ const styles = StyleSheet.create({
   logostyle: {
     flex: 0.3,
     justifyContent: "flex-start",
-    backgroundColor: 'purple'
+    // backgroundColor: 'purple'
   },
 
   Headermessage: {
@@ -144,14 +139,16 @@ const styles = StyleSheet.create({
   },
 
   Title: {
-    flex: 0.77,
-    backgroundColor: "green",
-    flexDirection: 'column'
+    flex: 0.7,
+    // backgroundColor: "green",
+    flexDirection: 'column',
+    paddingTop: 10
+    // justifyContent: 'center'
   },
 
   EmailPosition: {
     flex: 0.13,
-    backgroundColor: "brown",
+    // backgroundColor: "brown",
     justifyContent: 'center'
   },
 
@@ -163,30 +160,31 @@ const styles = StyleSheet.create({
   },
 
   info: {
-    flex: 0.20,
+    flex: 0.07,
     alignSelf: 'center',
     // marginLeft: 15,
     // alignContent: 'center'
-    backgroundColor: 'red'
+    // backgroundColor: 'red'
   },
 
   inputlayout: {
     flex: 0,
-    backgroundColor: 'blue',
+    // backgroundColor: 'blue',
     justifyContent: 'center',
-    padding: 20
+    padding: 20,
   },
 
   input: {
     height: 40,
     backgroundColor: 'rgba(255,255,255,0.2)',
     color: 'white',
-    paddingHorizontal: 10
+    paddingHorizontal: 10,
+    borderRadius: 20
   },
 
   submitbutton: {
       flex: 0.1,
-      backgroundColor: 'pink',
+      // backgroundColor: 'pink',
     //   justifyContent: 'center'
   }
 
