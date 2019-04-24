@@ -7,7 +7,6 @@ import {
     TouchableOpacity,
     Dimensions,
     TextInput,
-    KeyboardAvoidingView
 } from 'react-native';
 import RF from "react-native-responsive-fontsize";
 
