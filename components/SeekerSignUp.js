@@ -28,6 +28,15 @@ export default class SeekerSignUp extends Component {
         {
             alert("Passwords do not match")
         }
+         else
+ 		{
+ 			firebase.auth().createUserWithEmailAndPassword(this.state.email,this.state.password).then(cred=>{
+        firebase.auth().onAuthStateChanged(function(user) {
+            user.sendEmailVerification(); 
+          });
+ 				alert("signed up")
+			 })
+		 }
         
         /*WRITE FIREBASE CODE HERE*/
     }
