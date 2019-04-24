@@ -23,7 +23,8 @@ export default class SeekerSignUp extends Component {
         this.state = {
             email: '',
             password: '',
-            retyped: ''
+            retyped: '',
+            username: ''
         }
     }
 
@@ -73,6 +74,18 @@ export default class SeekerSignUp extends Component {
                   placeholderTextColor="rgba(255,255,255,0.5)"
                   onChangeText={(email)=>this.setState({email})}
                   value={this.state.email}
+                />
+              </View>
+              <View style={styles.inputlayout}>
+                <TextInput
+                  style={styles.input}
+                  placeholder="Username"
+                  returnKeyType="done"
+                  autoCapitalize="none"
+                  autoCorrect={true}
+                  placeholderTextColor="rgba(255,255,255,0.5)"
+                  onChangeText={(username) => this.setState({ username })}
+                  value={this.state.username}
                 />
               </View>
               <View style={styles.inputlayout}>
