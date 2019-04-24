@@ -43,7 +43,7 @@ export default class LoginHelper extends Component {
         }
         else
         {
-          alert("Enter Email and Password")
+          alert("Enter email and Password")
         }
       
       }
@@ -66,7 +66,7 @@ export default class LoginHelper extends Component {
                     <Text style={styles.textstyle}>Talk It Out</Text>
                 </View>
                 <View style={styles.Headermessage}>
-                    <Text style={styles.HMStyle}>Helper</Text>
+                    <Text style={styles.HMStyle}>Moderator</Text>
                 </View>
             </View>
             

@@ -28,8 +28,10 @@ export default class LoginAs extends Component {
               </View>
               <View style = {{flex: 0.75, justifyContent: "space-evenly"}}>
                  <View style={styles.seekeroption}>
-                    <TouchableOpacity style={styles.button}>
+                    <TouchableOpacity style={styles.button}
+                    onPress={() => this.props.navigation.navigate('SeekerLogin')}>
                         <Text style={styles.buttontext}>Seeker</Text> 
+                        
                     </TouchableOpacity>
                  </View>   
                 <View style={styles.modoption}>
@@ -40,7 +42,8 @@ export default class LoginAs extends Component {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.helperoption}>
-                    <TouchableOpacity style={styles.button}>
+                    <TouchableOpacity style={styles.button}
+                    onPress={() => this.props.navigation.navigate('ModeratorLogin')}>
                         <Text style={styles.buttontext}>Moderator</Text>
                     </TouchableOpacity>
                 </View>
