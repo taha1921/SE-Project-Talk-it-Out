@@ -9,6 +9,9 @@ import HelperEmail from './components/HelperEmail.js'
 import HelperCode from "./components/HelperCode.js";
 import HelperSignUp from './components/HelperSignUp.js';
 import SeekerSignUp from './components/SeekerSignUp.js';
+import LoginAs from "./components/LoginAs.js";
+import LoginHelper from "./components/LoginHelper.js";
+import RF from "react-native-responsive-fontsize";
 
 const RootStack = createStackNavigator(
   {
@@ -30,6 +33,14 @@ const RootStack = createStackNavigator(
     
     Seekersignup : {
       screen: SeekerSignUp
+    },
+
+    LoginScreen: {
+      screen: LoginAs
+    },
+
+    HelperLogin: {
+      screen: LoginHelper
     }
   },
   {
@@ -39,9 +50,10 @@ const RootStack = createStackNavigator(
       headerStyle: {
         backgroundColor: "#1a2942"
       },
-      headerTintColor: "#fff",
+      headerTintColor: "#929eb2",
       headerTitleStyle: {
-        fontWeight: "bold"
+        fontWeight: "normal",
+        fontSize: RF(2.1)
       }
     }
   }

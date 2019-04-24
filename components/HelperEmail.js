@@ -15,14 +15,7 @@ import * as firebase from 'firebase';
 
 export default class HelperEmail extends Component {
     
-    componentWillMount() {
-      const firebaseConfig = {
-        apiKey: 'AIzaSyC8S1ImpMV_LohWmUiOAN6JctQPWw2KMZg',
-        authDomain: 'talkitout-123.firebaseapp.com'
-      }
 
-      firebase.initializeApp(firebaseConfig);
-    }
 
     constructor(props) {
       super(props);

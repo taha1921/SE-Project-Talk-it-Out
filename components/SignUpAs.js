@@ -9,8 +9,11 @@ import {
 } from 'react-native';
 import RF from "react-native-responsive-fontsize";
 
-
 export default class SignUpAs extends Component {
+
+    static navigationOptions = {
+      title: 'Sign Up',
+    }
 
     render() {
         return (
@@ -39,7 +42,7 @@ export default class SignUpAs extends Component {
                     <TouchableOpacity 
                     style={styles.button}
                     activeOpacity={0.5}
-                    onPress={() => this.props.navigation.navigate('HelperEmailScreen')}>
+                    onPress={() => this.props.navigation.navigate('Helpersignup')}>
                         <Text style={styles.buttontext}>Helper</Text>
                     </TouchableOpacity>
               </View>

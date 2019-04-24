@@ -13,7 +13,11 @@ import RF from "react-native-responsive-fontsize";
 import * as firebase from "firebase";
 
 export default class SeekerSignUp extends Component {
-    
+  
+    static navigationOptions = {
+      title: 'Seeker Sign Up',
+    }
+
     constructor(props) {
         super(props);
         this.state = {
@@ -38,7 +42,15 @@ export default class SeekerSignUp extends Component {
 			 })
 		 }
         
-        /*WRITE FIREBASE CODE HERE*/
+        else 
+        {
+          firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then(cred => {
+            firebase.auth().onAuthStateChanged(function (user) {
+              user.sendEmailVerification();
+            });
+            alert("signed up")
+          })
+        }
     }
     render() {
         return (
@@ -67,7 +79,7 @@ export default class SeekerSignUp extends Component {
                   keyboardType="email-address"
                   autoCapitalize="none"
                   autoCorrect={true}
-                  placeholderTextColor="rgba(255,255,255,0.2)"
+                  placeholderTextColor="rgba(255,255,255,0.5)"
                   onChangeText={(email)=>this.setState({email})}
                   value={this.state.email}
                 />
@@ -80,7 +92,7 @@ export default class SeekerSignUp extends Component {
                   autoCapitalize="none"
                   secureTextEntry={true}
                   autoCorrect={false}
-                  placeholderTextColor="rgba(255,255,255,0.2)"
+                  placeholderTextColor="rgba(255,255,255,0.5)"
                   onChangeText={(password)=>this.setState({password})}
                   value={this.state.password}                
                 />
@@ -93,7 +105,7 @@ export default class SeekerSignUp extends Component {
                   autoCapitalize="none"
                   secureTextEntry={true}
                   autoCorrect={false}
-                  placeholderTextColor="rgba(255,255,255,0.2)"
+                  placeholderTextColor="rgba(255,255,255,0.5)"
                   onChangeText={(retyped)=>this.setState({retyped})}
                   value={this.state.retyped}
                 />
@@ -105,7 +117,7 @@ export default class SeekerSignUp extends Component {
                     activeOpacity={0.5}
                     onPress={this.verify}
                     >
-                        <Text style={styles.buttontext}>Send Code</Text>
+                        <Text style={styles.buttontext}>Sign Up</Text>
                     </TouchableOpacity>
                 </View>
             </View>

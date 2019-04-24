@@ -7,15 +7,17 @@ import {
     TouchableOpacity,
     Dimensions
 } from 'react-native';
-// import { Directions } from 'react-native-gesture-handler';
-
+import RF from "react-native-responsive-fontsize";
 
 export default class LoginAs extends Component {
+  
+    static navigationOptions = {
+      title: 'Login',
+    }
 
     render() {
         return (
           <View style={styles.viewstyle}>
-            {/* <View style={{flex: 0.9}}> */}
               <View style={styles.HeaderStyle}>
                 <View style={styles.logostyle}>
                   <Text style={styles.textstyle}>Talk It Out</Text>
@@ -44,10 +46,6 @@ export default class LoginAs extends Component {
                 </View>
              
               </View>
-              
-              
-            {/* </View> */}
-            {/* <View style={{flex:0.2}}></View> */}
           </View>
         );
     }
@@ -57,10 +55,11 @@ const styles = StyleSheet.create({
   button: {
     fontFamily: "Poppins",
     alignItems: "center",
-        backgroundColor: "#244882",
+    backgroundColor: "#244882",
     padding: 10,
     alignSelf: "center",
-    width: Dimensions.get("window").width / 2.5
+    width: Dimensions.get("window").width / 2.5,
+    borderRadius: 20
   },
 
   buttontext: {
@@ -71,28 +70,30 @@ const styles = StyleSheet.create({
 
   textstyle: {
     fontFamily: "Poppins",
-    fontSize: 14,
+    fontSize: 15,
     color: "#536787"
   },
 
   logostyle: {
-    flex: 0.18
+    flex: 0.3,
+    justifyContent: 'flex-start'
   },
 
   Headermessage: {
     flex: 0.7,
-    paddingTop: 15
+    justifyContent: 'center',
+    alignItems: 'center'
   },
 
   HMStyle: {
     fontFamily: "Poppins",
-    fontSize: 30,
+    fontSize: RF(4.5),
     color: "#158ec1"
   },
 
   HeaderStyle: {
     flex: 0.1,
-    flexDirection: "row",
+    flexDirection: "column",
     justifyContent: "space-between"
   },
 
@@ -120,9 +121,9 @@ const styles = StyleSheet.create({
   message: {
     alignSelf: "center",
     fontFamily: "Poppins",
-    fontSize: 17,
+    fontSize: RF(3),
     color: "#158ec1",
   }
 });
 
-//AppRegistry.registerComponent("SignUpAs", () => SignUpAs)
+AppRegistry.registerComponent("LoginAs", () => LoginAs)
