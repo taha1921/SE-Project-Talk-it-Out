@@ -11,6 +11,8 @@ import HelperSignUp from './components/HelperSignUp.js';
 import SeekerSignUp from './components/SeekerSignUp.js';
 import LoginAs from "./components/LoginAs.js";
 import LoginHelper from "./components/LoginHelper.js";
+import LoginSeeker from "./components/LoginSeeker";
+import LoginModerator from "./components/LoginModerator.js";
 import RF from "react-native-responsive-fontsize";
 
 const RootStack = createStackNavigator(
@@ -41,6 +43,14 @@ const RootStack = createStackNavigator(
 
     HelperLogin: {
       screen: LoginHelper
+    },
+
+    SeekerLogin: {
+      screen: LoginSeeker
+    },
+
+    ModeratorLogin: {
+      screen: LoginModerator
     }
   },
   {
