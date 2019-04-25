@@ -13,6 +13,8 @@ import {
 import DatePicker from "react-native-datepicker";
 import RF from "react-native-responsive-fontsize";
 import {CheckBox} from 'react-native-elements'
+import * as firebase from "firebase";
+import 'firebase/firestore';
 
 export default class HelperSignUp extends Component {
     
@@ -39,7 +41,57 @@ export default class HelperSignUp extends Component {
     }
 
     verify = () => {
+        if(this.state.password != this.state.retyped)
+        {
+            alert("Passwords do not match")
+        }
+        
+        else 
+        {
+          const email = this.state.email;
+          const username = this.state.username;
+          const name = this.state.name;
+          const gender = this.state.gender;
+          const pref = [];
+          const age = this.state.date
+          if(this.state.depression){
+              pref.push("Depression");
+          }
+          if(this.state.anxiety){
+              pref.push("Anxiety");
+          }
+          if(this.state.loneliness){
+              pref.push("Loneliness");
+          }
+          if(this.state.abuse){
+              pref.push("Abuse");
+          }
+          if(this.state.comfort){
+              pref.push("Comfort");
+          }
+          firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then(cred => {
+            firebase.auth().onAuthStateChanged(function (user) {
+              user.sendEmailVerification();
+              firebase.firestore().collection("Helpers").doc(user.uid).set({
+                Username: username,
+                Email: email,
+                Currently_Connected : [],
+                Previously_Connected : [],
+                Name: name,
+                Preferences: pref,
+                Gender:gender,
+                Rating: 0,
+                Reviews: [],
+                Age: age,
 
+              })
+              .then(function() {
+                alert("lol")
+              });
+            });
+            alert("signed up")
+          })
+        }
     }
     
     render() {
