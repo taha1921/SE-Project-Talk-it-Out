@@ -97,7 +97,6 @@ export default class LoginHelper extends Component {
                     placeholder="Password"
                     returnKeyType="go"
                     keyboardType="default"
-                    // password={true}
                     secureTextEntry={true}
                     autoCapitalize="none"
                     onChangeText={(password)=>this.setState({password})}
