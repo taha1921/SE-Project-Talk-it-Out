@@ -86,7 +86,7 @@ export default class HelperSignUp extends Component {
 
               })
               .then(function() {
-                alert("lol")
+                alert("database updated")
               });
             });
             alert("signed up")
