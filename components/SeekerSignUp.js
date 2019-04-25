@@ -11,20 +11,21 @@ import {
 } from "react-native";
 import RF from "react-native-responsive-fontsize";
 import * as firebase from "firebase";
+import 'firebase/firestore';
 
 export default class SeekerSignUp extends Component {
   
     static navigationOptions = {
       title: 'Seeker Sign Up',
     }
-
+    
     constructor(props) {
         super(props);
         this.state = {
             email: '',
             password: '',
             retyped: '',
-            username: ''
+            username: '',
         }
     }
 
@@ -36,9 +37,20 @@ export default class SeekerSignUp extends Component {
         
         else 
         {
+          const email = this.state.email;
+          const username = this.state.username
           firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then(cred => {
             firebase.auth().onAuthStateChanged(function (user) {
               user.sendEmailVerification();
+              firebase.firestore().collection("Seekers").doc(user.uid).set({
+                Username: username,
+                Email: email,
+                Currently_Connected : [],
+                Previously_Connected : [],
+              })
+              .then(function() {
+                alert("lol")
+              });
             });
             alert("signed up")
           })
