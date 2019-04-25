@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import {
+  ActivityIndicator,
   AppRegistry,
   StyleSheet,
   Text,
@@ -36,8 +37,66 @@ export default class HelperSignUp extends Component {
             anxiety: false,
             loneliness: false,
             abuse: false,
-            comfort: false
+            comfort: false,
+            loader: false
         }
+    }
+    conditions = () =>{
+        if (!(this.state.depression || this.state.anxiety || this.state.loneliness || this.state.abuse || this.state.comfort))
+          {
+            //   alert("You have a very good life")
+            alert("Enter at least one preference")
+            return true
+          } 
+          if (this.state.password == "")
+          {
+              alert("Enter Password")
+              return True
+          }
+          
+          if (this.state.retyped == "")
+          {
+              alert("Enter Retyped Password")
+              return true
+          }
+          
+          if (this.state.username == "")
+          {
+              alert("Enter Username")
+              return true
+          }
+          if (this.state.email == "")
+          {
+              alert("Enter Email")
+              return true
+          }
+          
+          if (this.state.name == "")
+          {
+              alert("Enter Name")
+              return true
+          }
+          if (this.state.date == "")
+          {
+              alert("Enter Date")
+              return true
+          }
+          
+          if (this.state.gender == "")
+          {
+              alert("Enter Gender")
+              return true
+          }
+          if(this.state.password.length<6)
+          {
+              alert("Password should be at least six letters")
+              return true
+          }
+
+          return false
+
+          
+
     }
 
     verify = () => {
@@ -48,49 +107,61 @@ export default class HelperSignUp extends Component {
         
         else 
         {
-          const email = this.state.email;
-          const username = this.state.username;
-          const name = this.state.name;
-          const gender = this.state.gender;
-          const pref = [];
-          const age = this.state.date
-          if(this.state.depression){
-              pref.push("Depression");
-          }
-          if(this.state.anxiety){
-              pref.push("Anxiety");
-          }
-          if(this.state.loneliness){
-              pref.push("Loneliness");
-          }
-          if(this.state.abuse){
-              pref.push("Abuse");
-          }
-          if(this.state.comfort){
-              pref.push("Comfort");
-          }
-          firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then(cred => {
-            firebase.auth().onAuthStateChanged(function (user) {
-              user.sendEmailVerification();
-              firebase.firestore().collection("Helpers").doc(user.uid).set({
-                Username: username,
-                Email: email,
-                Currently_Connected : [],
-                Previously_Connected : [],
-                Name: name,
-                Preferences: pref,
-                Gender:gender,
-                Rating: 0,
-                Reviews: [],
-                Age: age,
+          if (this.conditions())
+          {
+            //   alert("You have a very good life")
+            // alert("Enter at least one preference")
+          } 
+          else
+          {
 
-              })
-              .then(function() {
-                alert("lol")
-              });
-            });
-            alert("signed up")
-          })
+            this.setState({loader:true})
+            const email = this.state.email;
+            const username = this.state.username;
+            const name = this.state.name;
+            const gender = this.state.gender;
+            const pref = [];
+            const age = this.state.date
+            if(this.state.depression){
+                pref.push("Depression");
+            }
+            if(this.state.anxiety){
+                pref.push("Anxiety");
+            }
+            if(this.state.loneliness){
+                pref.push("Loneliness");
+            }
+            if(this.state.abuse){
+                pref.push("Abuse");
+            }
+            if(this.state.comfort){
+                pref.push("Comfort");
+            }
+            firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then(cred => {
+                firebase.auth().onAuthStateChanged(function (user) {
+                user.sendEmailVerification();
+                firebase.firestore().collection("Helpers").doc(user.uid).set({
+                    Username: username,
+                    Email: email,
+                    Currently_Connected : [],
+                    Previously_Connected : [],
+                    Name: name,
+                    Preferences: pref,
+                    Gender:gender,
+                    Rating: 0,
+                    Reviews: [],
+                    Age: age,
+
+                })
+                .then(function() {
+                    alert("database updated")
+                });
+                });
+                alert("signed up")
+                
+                this.setState({loader:false})
+            })
+        }
         }
     }
     
@@ -270,6 +341,14 @@ export default class HelperSignUp extends Component {
                     >
                         <Text style={styles.buttontext}>Sign Up</Text>
                     </TouchableOpacity>
+                    {
+                      this.state.loader ?
+                      <ActivityIndicator size = "large" style = {{flex: 0.9}}/>
+                      :
+                      <Text></Text>
+
+                    }
+
                 </View>
                 <View style={{padding: 5}}></View>
             </ScrollView>
