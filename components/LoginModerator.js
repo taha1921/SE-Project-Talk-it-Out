@@ -131,115 +131,93 @@ export default class LoginHelper extends Component {
 }
 
 const styles = StyleSheet.create({
-  button: {
-    fontFamily: "Poppins",
-    alignItems: "center",
-    backgroundColor: "#244882",
-    padding: 10,
-    alignSelf: "center",
-    width: Dimensions.get("window").width / 2.5,
-    borderRadius: 20
-  },
+    button: {
+      fontFamily: "Poppins",
+      alignItems: "center",
+      backgroundColor: "#244882",
+      padding: 10,
+      alignSelf: "center",
+      width: Dimensions.get("window").width / 2.5,
+      borderRadius: 20
+    },
 
-  buttontext: {
-    fontFamily: "Poppins",
-    fontSize: 20,
-    color: "white"
-  },
+    buttontext: {
+      fontFamily: "Poppins",
+      fontSize: 20,
+      color: "white"
+    },
 
-  textstyle: {
-    fontFamily: "Poppins",
-    fontSize: 15,
-    color: "#536787"
-  },
+    textstyle: {
+      fontFamily: "Poppins",
+      fontSize: 15,
+      color: "#536787"
+    },
 
-  logostyle: {
-    flex: 0.3,
-    justifyContent: "flex-start",
-    // backgroundColor: 'purple'
-  },
+    logostyle: {
+      flex: 0.3,
+      justifyContent: "flex-start",
+    },
 
-  Headermessage: {
-    flex: 0.7,
-    justifyContent: "center",
-    alignItems: "center"
-  },
+    Headermessage: {
+      flex: 0.7,
+      justifyContent: "center",
+      alignItems: "center"
+    },
 
-  HMStyle: {
-    fontFamily: "Poppins",
-    fontSize: RF(4.5),
-    color: "#158ec1"
-  },
+    HMStyle: {
+      fontFamily: "Poppins",
+      fontSize: RF(4.5),
+      color: "#158ec1"
+    },
 
-  HeaderStyle: {
-    flex: 0.1,
-    flexDirection: "column",
-    justifyContent: "space-between",
-  },
-
-  viewstyle: {
-    flex: 1,
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    backgroundColor: "#1a2942"
-  },
-
-  message: {
-    alignSelf: "center",
-    fontFamily: "Poppins",
-    fontSize: 17,
-    color: "#158ec1"
-  },
-
-  Title: {
-    flex: 0.7,
-    // backgroundColor: "green",
-    flexDirection: 'column',
-    paddingTop: 10
-    // justifyContent: 'center'
-  },
-
-  EmailPosition: {
-    flex: 0.13,
-    // backgroundColor: "brown",
-    justifyContent: 'center'
-  },
-
-  TitleStyle: {
-    fontFamily: "Poppins",
-    fontSize: 20,
-    color: "#158ec1",
-    alignSelf: 'center'
-  },
-
-  info: {
-    flex: 0.07,
-    alignSelf: 'center',
-    // marginLeft: 15,
-    // alignContent: 'center'
-    // backgroundColor: 'red'
-  },
-
-  inputlayout: {
-    flex: 0,
-    // backgroundColor: 'blue',
-    justifyContent: 'center',
-    padding: 20,
-  },
-
-  input: {
-    height: 40,
-    backgroundColor: 'rgba(255,255,255,0.2)',
-    color: 'white',
-    paddingHorizontal: 10,
-    borderRadius: 20
-  },
-
-  submitbutton: {
+    HeaderStyle: {
       flex: 0.1,
-      // backgroundColor: 'pink',
-    //   justifyContent: 'center'
-  }
+      flexDirection: "column",
+      justifyContent: "space-between",
+    },
+
+    viewstyle: {
+      flex: 1,
+      flexDirection: "column",
+      justifyContent: "flex-start",
+      backgroundColor: "#1a2942"
+    },
+
+    message: {
+      alignSelf: "center",
+      fontFamily: "Poppins",
+      fontSize: 17,
+      color: "#158ec1"
+    },
+
+    Title: {
+      flex: 0.7,
+      flexDirection: 'column',
+      paddingTop: 10
+    },
+
+    info: {
+      flex: 0.07,
+      alignSelf: 'center',
+    },
+
+    inputlayout: {
+      flex: 0,
+      justifyContent: 'center',
+      padding: 20,
+    },
+
+    input: {
+      height: 40,
+      backgroundColor: 'rgba(255,255,255,0.2)',
+      color: 'white',
+      paddingHorizontal: 10,
+      borderRadius: 20
+    },
+
+    submitbutton: {
+      flex: 0.1,
+    }
 
 });
 

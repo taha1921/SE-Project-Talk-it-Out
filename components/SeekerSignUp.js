@@ -59,7 +59,6 @@ export default class SeekerSignUp extends Component {
     render() {
         return (
           <ScrollView contentContainerStyle={styles.viewstyle}>
-            
             {/*Header portion*/}
             <View style={styles.HeaderStyle}>
               <View style={styles.logostyle}>
@@ -70,11 +69,19 @@ export default class SeekerSignUp extends Component {
               </View>
             </View>
 
+          <View style = {{padding: 20}}></View>
             {/*Input Portion*/}
             <View style={styles.scrollstyle}>
               <View style={styles.info}>
-                    <Text style={styles.message}>Please enter in all the following fields before proceeding</Text>
+                <Text style={styles.message}>
+                  Please enter in all the following fields before
+                  proceeding
+                </Text>
               </View>
+
+          <View style = {{padding: 10}}></View>
+
+              {/*Email Input*/}
               <View style={styles.inputlayout}>
                 <TextInput
                   style={styles.input}
@@ -84,10 +91,13 @@ export default class SeekerSignUp extends Component {
                   autoCapitalize="none"
                   autoCorrect={true}
                   placeholderTextColor="rgba(255,255,255,0.5)"
-                  onChangeText={(email)=>this.setState({email})}
+                  onChangeText={email => this.setState({ email })}
                   value={this.state.email}
                 />
               </View>
+
+          <View style={{ padding: 10 }}></View>
+              {/*Username Input*/}
               <View style={styles.inputlayout}>
                 <TextInput
                   style={styles.input}
@@ -96,10 +106,14 @@ export default class SeekerSignUp extends Component {
                   autoCapitalize="none"
                   autoCorrect={true}
                   placeholderTextColor="rgba(255,255,255,0.5)"
-                  onChangeText={(username) => this.setState({ username })}
+                  onChangeText={username => this.setState({ username })}
                   value={this.state.username}
                 />
               </View>
+
+          <View style={{ padding: 10 }}></View>
+
+              {/*Password Input*/}
               <View style={styles.inputlayout}>
                 <TextInput
                   style={styles.input}
@@ -109,10 +123,14 @@ export default class SeekerSignUp extends Component {
                   secureTextEntry={true}
                   autoCorrect={false}
                   placeholderTextColor="rgba(255,255,255,0.5)"
-                  onChangeText={(password)=>this.setState({password})}
-                  value={this.state.password}                
+                  onChangeText={password => this.setState({ password })}
+                  value={this.state.password}
                 />
               </View>
+
+          <View style={{ padding: 10 }}></View>
+
+              {/*Confirm Password*/}
               <View style={styles.inputlayout}>
                 <TextInput
                   style={styles.input}
@@ -122,20 +140,25 @@ export default class SeekerSignUp extends Component {
                   secureTextEntry={true}
                   autoCorrect={false}
                   placeholderTextColor="rgba(255,255,255,0.5)"
-                  onChangeText={(retyped)=>this.setState({retyped})}
+                  onChangeText={retyped => this.setState({ retyped })}
                   value={this.state.retyped}
                 />
               </View>
 
+          <View style={{ padding: 15 }}></View>
+
               <View style={styles.submitbutton}>
-                    <TouchableOpacity 
-                    style={styles.button}
-                    activeOpacity={0.5}
-                    onPress={this.verify}
-                    >
-                        <Text style={styles.buttontext}>Sign Up</Text>
-                    </TouchableOpacity>
-                </View>
+                <TouchableOpacity
+                  style={styles.button}
+                  activeOpacity={0.5}
+                  onPress={this.verify}
+                >
+                  <Text style={styles.buttontext}>Sign Up</Text>
+                </TouchableOpacity>
+              </View>
+
+          <View style={{ padding: 35 }}></View>
+
             </View>
           </ScrollView>
         );
@@ -190,7 +213,6 @@ const styles = StyleSheet.create({
   },
 
   viewstyle: {
-    flex: 1,
     flexDirection: "column",
     justifyContent: "flex-start",
     backgroundColor: "#1a2942"
@@ -200,7 +222,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     justifyContent: "space-evenly",
-    // backgroundColor: 'red'
   },
 
   info: {

@@ -97,7 +97,6 @@ export default class LoginHelper extends Component {
                     placeholder="Password"
                     returnKeyType="go"
                     keyboardType="default"
-                    // password={true}
                     secureTextEntry={true}
                     autoCapitalize="none"
                     onChangeText={(password)=>this.setState({password})}
@@ -156,7 +155,6 @@ const styles = StyleSheet.create({
   logostyle: {
     flex: 0.3,
     justifyContent: "flex-start",
-    // backgroundColor: 'purple'
   },
 
   Headermessage: {
@@ -193,36 +191,17 @@ const styles = StyleSheet.create({
 
   Title: {
     flex: 0.7,
-    // backgroundColor: "green",
     flexDirection: 'column',
     paddingTop: 10
-    // justifyContent: 'center'
-  },
-
-  EmailPosition: {
-    flex: 0.13,
-    // backgroundColor: "brown",
-    justifyContent: 'center'
-  },
-
-  TitleStyle: {
-    fontFamily: "Poppins",
-    fontSize: 20,
-    color: "#158ec1",
-    alignSelf: 'center'
   },
 
   info: {
     flex: 0.07,
     alignSelf: 'center',
-    // marginLeft: 15,
-    // alignContent: 'center'
-    // backgroundColor: 'red'
   },
 
   inputlayout: {
     flex: 0,
-    // backgroundColor: 'blue',
     justifyContent: 'center',
     padding: 20,
   },
@@ -237,8 +216,6 @@ const styles = StyleSheet.create({
 
   submitbutton: {
       flex: 0.1,
-      // backgroundColor: 'pink',
-    //   justifyContent: 'center'
   }
 
 });

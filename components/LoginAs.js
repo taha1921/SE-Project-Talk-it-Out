@@ -18,6 +18,7 @@ export default class LoginAs extends Component {
     render() {
         return (
           <View style={styles.viewstyle}>
+              
               <View style={styles.HeaderStyle}>
                 <View style={styles.logostyle}>
                   <Text style={styles.textstyle}>Talk It Out</Text>
@@ -26,22 +27,26 @@ export default class LoginAs extends Component {
                   <Text style={styles.HMStyle}>Login As</Text>
                 </View>
               </View>
+              
               <View style = {{flex: 0.75, justifyContent: "space-evenly"}}>
-                 <View style={styles.seekeroption}>
+              
+                 <View>
                     <TouchableOpacity style={styles.button}
                     onPress={() => this.props.navigation.navigate('SeekerLogin')}>
                         <Text style={styles.buttontext}>Seeker</Text> 
                         
                     </TouchableOpacity>
                  </View>   
-                <View style={styles.modoption}>
+              
+                <View>
                     <TouchableOpacity style={styles.button}
                     onPress={() => this.props.navigation.navigate('HelperLogin')}
                     >
                         <Text style={styles.buttontext}>Helper</Text>
                     </TouchableOpacity>
                 </View>
-                <View style={styles.helperoption}>
+                
+                <View>
                     <TouchableOpacity style={styles.button}
                     onPress={() => this.props.navigation.navigate('ModeratorLogin')}>
                         <Text style={styles.buttontext}>Moderator</Text>
@@ -107,26 +112,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#1a2942"
   },
 
-  seekeroption: {
-    paddingTop: 0,
-    justifyContent: 'center',
-    // backgroundColor: 'red'
-  },
 
-  helperoption: {
-    // backgroundColor: 'green'
-
-  },
-  modoption: {
-    // backgroundColor: 'pink'
-  },
-
-  message: {
-    alignSelf: "center",
-    fontFamily: "Poppins",
-    fontSize: RF(3),
-    color: "#158ec1",
-  }
 });
 
 AppRegistry.registerComponent("LoginAs", () => LoginAs)
