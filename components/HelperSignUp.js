@@ -94,9 +94,6 @@ export default class HelperSignUp extends Component {
           }
 
           return false
-
-          
-
     }
 
     verify = () => {

@@ -7,7 +7,8 @@ import {
   TouchableOpacity,
   Dimensions,
   TextInput,
-  ScrollView
+  ScrollView,
+  AsyncStorage
 } from "react-native";
 import RF from "react-native-responsive-fontsize";
 import * as firebase from "firebase";
@@ -29,6 +30,13 @@ export default class SeekerSignUp extends Component {
         }
     }
 
+    componentWillMount(){
+      AsyncStorage.getItem('username').then(val => {
+        if(val){
+        }
+      })
+    }
+
     verify = () => {
         if(this.state.password != this.state.retyped)
         {
@@ -39,7 +47,7 @@ export default class SeekerSignUp extends Component {
         {
           const email = this.state.email;
           const username = this.state.username
-          firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then(cred => {
+          firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then(async cred => {
             firebase.auth().onAuthStateChanged(function (user) {
               user.sendEmailVerification();
               firebase.firestore().collection("Seekers").doc(user.uid).set({
@@ -47,13 +55,15 @@ export default class SeekerSignUp extends Component {
                 Email: email,
                 Currently_Connected : [],
                 Previously_Connected : [],
-              })
-              .then(function() {
+              }).then(function() {
                 alert("lol")
               });
             });
+            await AsyncStorage.setItem('username', this.state.username)
             alert("signed up")
+
           })
+
         }
     }
     render() {

@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import {
   AppRegistry,
+  View,
+  Text
 } from 'react-native';
-import { createStackNavigator, createAppContainer } from "react-navigation";
+import { createStackNavigator, createAppContainer, createSwitchNavigator } from "react-navigation";
 import OpeningScreen from './components/OpeningScreen.js';
 import SignUpAs from './components/SignUpAs.js';
-import HelperEmail from './components/HelperEmail.js'
-import HelperCode from "./components/HelperCode.js";
 import HelperSignUp from './components/HelperSignUp.js';
 import SeekerSignUp from './components/SeekerSignUp.js';
 import LoginAs from "./components/LoginAs.js";
@@ -14,21 +14,18 @@ import LoginHelper from "./components/LoginHelper.js";
 import LoginSeeker from "./components/LoginSeeker";
 import LoginModerator from "./components/LoginModerator.js";
 import RF from "react-native-responsive-fontsize";
+import AuthLoadingScreen from "./components/AuthLoadingScreen.js";
 
-const RootStack = createStackNavigator(
+const AuthStack = createStackNavigator(
   {
     Opening: {
       screen: OpeningScreen
     },
+    
     SignUpOptions: {
       screen: SignUpAs
     },
-    HelperEmailScreen: {
-      screen: HelperEmail
-    },
-    HelperVerification : {
-      screen: HelperCode
-    },
+    
     Helpersignup : {
       screen: HelperSignUp
     },
@@ -69,15 +66,41 @@ const RootStack = createStackNavigator(
   }
 );
 
-const AppContainer = createAppContainer(RootStack);
-
-export default class myapp extends Component{
+class HomeScreen extends React.Component {
+  static navigationOptions = {
+    title: 'Welcome to the app!',
+  };
 
   render() {
     return (
-        <AppContainer/>
+      <View>
+        <Text>Main HomeScreen</Text>
+      </View>
     );
   }
 }
+
+const AppStack = createStackNavigator({ Home: HomeScreen});
+// const AppContainer = createAppContainer(AuthStack);
+
+// export default class myapp extends Component{
+
+//   render() {
+//     return (
+//         <AppContainer/>
+//     );
+//   }
+// }
+
+export default createAppContainer(createSwitchNavigator(
+  {
+    AuthLoading: AuthLoadingScreen,
+    App: AppStack,
+    Auth: AuthStack,
+  },
+  {
+    initialRouteName: 'AuthLoading',
+  }
+));
 
 AppRegistry.registerComponent("myapp", () => myapp)
