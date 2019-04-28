@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import RF from "react-native-responsive-fontsize";
 
-export default class LoginAs extends Component {
+export default class Awareness extends Component {
 
     static navigationOptions = {
         title: 'Login',
@@ -24,7 +24,7 @@ export default class LoginAs extends Component {
                         <Text style={styles.textstyle}>Talk It Out</Text>
                     </View>
                     <View style={styles.Headermessage}>
-                        <Text style={styles.HMStyle}>Login As</Text>
+                        <Text style={styles.HMStyle}>Awareness</Text>
                     </View>
                 </View>
 
@@ -32,7 +32,7 @@ export default class LoginAs extends Component {
 
                     <View>
                         <TouchableOpacity style={styles.button}
-                            onPress={() => this.props.navigation.navigate('SeekerLogin')}>
+                            onPress={() => this.props.navigation.navigate('GenAware')}>
                             <Text style={styles.buttontext}>General Awareness</Text>
 
                         </TouchableOpacity>
@@ -40,7 +40,7 @@ export default class LoginAs extends Component {
 
                     <View>
                         <TouchableOpacity style={styles.button}
-                            onPress={() => this.props.navigation.navigate('HelperLogin')}
+                            onPress={() => this.props.navigation.navigate('SuicideHotlines')}
                         >
                             <Text style={styles.buttontext}>Suicide Hotlines</Text>
                         </TouchableOpacity>
@@ -48,14 +48,14 @@ export default class LoginAs extends Component {
 
                     <View>
                         <TouchableOpacity style={styles.button}
-                            onPress={() => this.props.navigation.navigate('ModeratorLogin')}>
+                            onPress={() => this.props.navigation.navigate('Therapist')}>
                             <Text style={styles.buttontext}>Therapists and Counsellors</Text>
                         </TouchableOpacity>
                     </View>
 
                     <View>
                         <TouchableOpacity style={styles.button}
-                            onPress={() => this.props.navigation.navigate('ModeratorLogin')}>
+                            onPress={() => this.props.navigation.navigate('OnlineServices')}>
                             <Text style={styles.buttontext}>Online Services</Text>
                         </TouchableOpacity>
                     </View>
