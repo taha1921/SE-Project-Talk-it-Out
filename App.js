@@ -15,6 +15,7 @@ import LoginSeeker from "./components/LoginSeeker";
 import LoginModerator from "./components/LoginModerator.js";
 import RF from "react-native-responsive-fontsize";
 import AuthLoadingScreen from "./components/AuthLoadingScreen.js";
+import Chat from "./components/Chat.js";
 
 const AuthStack = createStackNavigator(
   {
@@ -71,6 +72,7 @@ class HomeScreen extends React.Component {
     title: 'Welcome to the app!',
   };
 
+  
   render() {
     return (
       <View>
@@ -87,7 +89,7 @@ const AppStack = createStackNavigator({ Home: HomeScreen});
 
 //   render() {
 //     return (
-//         <AppContainer/>
+//         <Chat/>
 //     );
 //   }
 // }

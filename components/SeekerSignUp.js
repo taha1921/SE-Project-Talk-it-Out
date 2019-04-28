@@ -56,7 +56,7 @@ export default class SeekerSignUp extends Component {
                 Currently_Connected : [],
                 Previously_Connected : [],
               }).then(function() {
-                alert("lol")
+                alert("database updated")
               });
             });
             await AsyncStorage.setItem('username', this.state.username)

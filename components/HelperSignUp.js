@@ -51,7 +51,7 @@ export default class HelperSignUp extends Component {
           if (this.state.password == "")
           {
               alert("Enter Password")
-              return True
+              return true
           }
           
           if (this.state.retyped == "")
@@ -155,7 +155,6 @@ export default class HelperSignUp extends Component {
                 });
                 });
                 alert("signed up")
-                
                 this.setState({loader:false})
             })
         }
