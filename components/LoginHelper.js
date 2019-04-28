@@ -50,9 +50,10 @@ export default class LoginHelper extends Component {
      }
      else
      {
-      alert(this.state.password)
       this.setState({loader:true, ButtonState: true})
-     
+      /*
+        WRITE LOGIN CODE HERE
+      */
 
      }
       

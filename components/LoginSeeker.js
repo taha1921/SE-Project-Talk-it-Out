@@ -52,7 +52,9 @@ export default class LoginHelper extends Component {
      {
       alert(this.state.password)
       this.setState({loader:true, ButtonState: true})
-     
+      /*
+        WRITE LOGIN CODE HERE
+      */
 
      }
       
@@ -79,7 +81,7 @@ export default class LoginHelper extends Component {
                 <View style={styles.inputlayout}>
                     <TextInput 
                     style={styles.input}
-                    placeholder="LUMS Email"
+                    placeholder="Email"
                     returnKeyType="done"
                     keyboardType="email-address"
                     autoCapitalize="none"

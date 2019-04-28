@@ -79,7 +79,7 @@ export default class LoginHelper extends Component {
                 <View style={styles.inputlayout}>
                     <TextInput 
                     style={styles.input}
-                    placeholder="LUMS Email"
+                    placeholder="Email"
                     returnKeyType="done"
                     keyboardType="email-address"
                     autoCapitalize="none"
