@@ -9,7 +9,7 @@ import {
   Dimensions,
   TextInput,
   View,
-  Picker
+  Picker,
 } from "react-native";
 import DatePicker from "react-native-datepicker";
 import RF from "react-native-responsive-fontsize";
@@ -106,8 +106,6 @@ export default class HelperSignUp extends Component {
         {
           if (this.conditions())
           {
-            //   alert("You have a very good life")
-            // alert("Enter at least one preference")
           } 
           else
           {
@@ -136,26 +134,30 @@ export default class HelperSignUp extends Component {
             }
             firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then(cred => {
                 firebase.auth().onAuthStateChanged(function (user) {
-                user.sendEmailVerification();
-                firebase.firestore().collection("Helpers").doc(user.uid).set({
-                    Username: username,
-                    Email: email,
-                    Currently_Connected : [],
-                    Previously_Connected : [],
-                    Name: name,
-                    Preferences: pref,
-                    Gender:gender,
-                    Rating: 0,
-                    Reviews: [],
-                    Age: age,
+                if(user)
+                {
+                    if(!user.emailVerified)
+                    {
+                        user.sendEmailVerification();
+                        firebase.firestore().collection("Helpers").doc(user.uid).set({
+                            Username: username,
+                            Email: email,
+                            Currently_Connected: [],
+                            Previously_Connected: [],
+                            Name: name,
+                            Preferences: pref,
+                            Gender: gender,
+                            Rating: 0,
+                            Reviews: [],
+                            Age: age,
 
-                })
-                .then(function() {
-                    alert("database updated")
+                        }).then(function () {});
+                        alert("Verification Email sent")
+                        this.setState({ loader: false })
+                    }
+                }
                 });
-                });
-                alert("signed up")
-                this.setState({loader:false})
+
             })
         }
         }

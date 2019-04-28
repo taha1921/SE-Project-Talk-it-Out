@@ -47,21 +47,25 @@ export default class SeekerSignUp extends Component {
         {
           const email = this.state.email;
           const username = this.state.username
-          firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then(async cred => {
+          firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then(cred => {
             firebase.auth().onAuthStateChanged(function (user) {
-              user.sendEmailVerification();
-              firebase.firestore().collection("Seekers").doc(user.uid).set({
-                Username: username,
-                Email: email,
-                Currently_Connected : [],
-                Previously_Connected : [],
-              }).then(function() {
-                alert("database updated")
-              });
+              if (user)
+              {
+                if (!user.emailVerified)
+                {
+                  user.sendEmailVerification();
+                  firebase.firestore().collection("Seekers").doc(user.uid).set({
+                    Username: username,
+                    Email: email,
+                    Currently_Connected: [],
+                    Previously_Connected: [],
+                  }).then(function () {
+                  });
+                  alert("Verification Email send")
+                }
+              
+              }
             });
-            await AsyncStorage.setItem('username', this.state.username)
-            alert("signed up")
-
           })
 
         }

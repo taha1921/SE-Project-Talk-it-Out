@@ -8,9 +8,13 @@ import {
     TouchableOpacity,
     Dimensions,
     TextInput,
-    KeyboardAvoidingView
+    KeyboardAvoidingView,
+    AsyncStorage
 } from 'react-native';
 import RF from "react-native-responsive-fontsize";
+import User from "../User.js"
+import * as firebase from "firebase";
+import "firebase/firestore";
 
 export default class LoginHelper extends Component {
   
@@ -50,12 +54,61 @@ export default class LoginHelper extends Component {
      }
      else
      {
-      alert(this.state.password)
+      // alert(this.state.password)
       this.setState({loader:true, ButtonState: true})
-      /*
-        WRITE LOGIN CODE HERE
-      */
 
+       var db = firebase.firestore();
+       var email = this.state.email;
+       const nav = this.props.navigation;
+       firebase.auth().onAuthStateChanged(function (user) 
+       {
+         if (user) 
+         {
+           var helpers = db.collection("Seekers").doc(user.uid);
+           helpers.get().then(function (doc) 
+           {
+             if (doc.exists) 
+             {
+               if (!user.emailVerified) 
+               {
+                 alert("Please Verify your account")
+                 //Signing user out because we need the user to sign in again.
+                 firebase.auth().signOut().then(function () {
+                   //User has been signed out
+                 }).catch(function (error) {
+                   alert(error.message)
+                 });
+               }
+               else 
+               {
+                AsyncStorage.setItem('useremail', email, () => {
+                  User.email = email
+                  User.usertype = "Seeker"
+                  nav.navigate('App')
+                })
+               }
+             }
+             else 
+             {
+               // doc.data() will be undefined in this case
+               alert("Invalid Email or Password");
+               //Signing user out because we need the user to sign in again.
+               firebase.auth().signOut().then(function () 
+               {
+                 //User has been signed out
+               }).catch(function (error) {
+                 alert(error.message)
+               });
+             }
+           }).catch(function (error) {
+             alert(error.message)
+             alert("Error getting document:", error);
+           });
+        }
+       })
+       firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).catch(function (error) {
+         alert(error.message);
+       });
      }
       
 }

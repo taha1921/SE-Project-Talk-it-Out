@@ -2,7 +2,9 @@ import React, {Component} from 'react';
 import {
   AppRegistry,
   View,
-  Text
+  Text,
+  TouchableOpacity,
+  AsyncStorage
 } from 'react-native';
 import { createStackNavigator, createAppContainer, createSwitchNavigator } from "react-navigation";
 import OpeningScreen from './components/OpeningScreen.js';
@@ -72,11 +74,17 @@ class HomeScreen extends React.Component {
     title: 'Welcome to the app!',
   };
 
-  
+  onPress = async () => {
+    await AsyncStorage.clear();
+    this.props.navigation.navigate('Auth');
+  }
   render() {
     return (
       <View>
         <Text>Main HomeScreen</Text>
+        <TouchableOpacity onPress={this.onPress}>
+          <Text>Logout</Text>
+        </TouchableOpacity>
       </View>
     );
   }
