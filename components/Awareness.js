@@ -5,7 +5,8 @@ import {
     Text,
     View,
     TouchableOpacity,
-    Dimensions
+    Dimensions,
+    AsyncStorage
 } from 'react-native';
 import RF from "react-native-responsive-fontsize";
 
@@ -14,7 +15,11 @@ export default class Awareness extends Component {
     static navigationOptions = {
         title: 'Login',
     }
-
+    logout = async () => {
+        await AsyncStorage.clear();
+        this.props.navigation.navigate('Auth');
+      }
+      
     render() {
         return (
             <View style={styles.viewstyle}>
@@ -59,6 +64,13 @@ export default class Awareness extends Component {
                             <Text style={styles.buttontext}>Online Services</Text>
                         </TouchableOpacity>
                     </View>
+                    <View>
+                        <TouchableOpacity style={styles.button}
+                            onPress={this.logout}>
+                            <Text style={styles.buttontext}>Log Out</Text>
+                        </TouchableOpacity>
+                    </View>
+
 
                 </View>
             </View>
