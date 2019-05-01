@@ -66,6 +66,12 @@ export default class Awareness extends Component {
                     </View>
                     <View>
                         <TouchableOpacity style={styles.button}
+                            onPress={() => this.props.navigation.navigate('Chat')}>
+                            <Text style={styles.buttontext}>Chat</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View>
+                        <TouchableOpacity style={styles.button}
                             onPress={this.logout}>
                             <Text style={styles.buttontext}>Log Out</Text>
                         </TouchableOpacity>
