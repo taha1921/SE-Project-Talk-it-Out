@@ -57,6 +57,10 @@ const AuthStack = createStackNavigator(
 
     ModeratorLogin: {
       screen: LoginModerator
+    },
+
+    Chat: {
+      screen: Chat
     }
   },
   {
@@ -113,6 +117,9 @@ const AppStack = createStackNavigator(
     SuicideHotlines: {
       screen: SuicideHotlines
     },
+    Chat: {
+      screen: Chat
+    }
   },
 
   {
