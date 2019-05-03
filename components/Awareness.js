@@ -9,12 +9,14 @@ import {
     AsyncStorage
 } from 'react-native';
 import RF from "react-native-responsive-fontsize";
+import { Header, Icon, Body, Title, Left } from 'native-base'
 
 export default class Awareness extends Component {
 
     static navigationOptions = {
-        title: 'Login',
+        title: 'Home',
     }
+
     logout = async () => {
         await AsyncStorage.clear();
         this.props.navigation.navigate('Auth');
@@ -23,7 +25,14 @@ export default class Awareness extends Component {
     render() {
         return (
             <View style={styles.viewstyle}>
-
+                <Header style={{ backgroundColor: '#1a2942'}}>
+                    <Left style = {{flex:0.1,}}>
+                    <Icon name= "menu" style={{color: 'white'}} onPress={() => this.props.navigation.openDrawer()}/>
+                    </Left>
+                    <Body style = {{alignItems: 'flex-start'}}>
+                        <Title>Home</Title>
+                    </Body>
+                </Header>
                 <View style={styles.HeaderStyle}>
                     <View style={styles.logostyle}>
                         <Text style={styles.textstyle}>Talk It Out</Text>
@@ -132,8 +141,8 @@ const styles = StyleSheet.create({
 
     viewstyle: {
         flex: 1,
-        flexDirection: "column",
-        justifyContent: "flex-start",
+        // flexDirection: "column",
+        // justifyContent: "flex-start",
         backgroundColor: "#1a2942"
     },
 

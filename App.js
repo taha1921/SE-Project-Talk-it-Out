@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import {
-  AppRegistry,
-  View,
-  Text,
-  TouchableOpacity,
-  AsyncStorage
+  AppRegistry, View,
+  Text, TouchableOpacity,
+  AsyncStorage, SafeAreaView,
+  ScrollView, Image
 } from 'react-native';
-import { createStackNavigator, createAppContainer, createSwitchNavigator } from "react-navigation";
+import { createStackNavigator, createAppContainer, createSwitchNavigator, createDrawerNavigator, DrawerItems } from "react-navigation";
 import OpeningScreen from './components/OpeningScreen.js';
 import SignUpAs from './components/SignUpAs.js';
 import HelperSignUp from './components/HelperSignUp.js';
@@ -59,10 +58,8 @@ const AuthStack = createStackNavigator(
       screen: LoginModerator
     },
 
-    Chat: {
-      screen: Chat
-    }
   },
+ 
   {
     initialRouteName: "Opening",
 
@@ -79,28 +76,18 @@ const AuthStack = createStackNavigator(
   }
 );
 
-class HomeScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Welcome to the app!',
-  };
+const CustomDrawer = (props) => (
+  <SafeAreaView style = {{flex: 1, backgroundColor: '#3e4b60'}}>
+    <View style = {{height: 150, backgroundColor: '#3e4b60', alignItems: 'center', justifyContent: 'center'}}>
+      <Image source = {require('./logo.png')} style = {{height: 120, width: 120, borderRadius: 60}} />
+    </View>
+    <ScrollView>
+      <DrawerItems {...props} />
+    </ScrollView>
+  </SafeAreaView>
+)
 
-  onPress = async () => {
-    await AsyncStorage.clear();
-    this.props.navigation.navigate('Auth');
-  }
-  render() {
-    return (
-      <View>
-        <Text>Main HomeScreen</Text>
-        <TouchableOpacity onPress={this.onPress}>
-          <Text>Logout</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  }
-}
-
-const AppStack = createStackNavigator(
+const AppStack = createDrawerNavigator (
   {
     Home: {
       screen: Awareness
@@ -123,6 +110,7 @@ const AppStack = createStackNavigator(
   },
 
   {
+    contentComponent: CustomDrawer,
     initialRouteName: "Home",
     defaultNavigationOptions: {
       headerStyle: {
@@ -131,7 +119,7 @@ const AppStack = createStackNavigator(
       headerTintColor: "#929eb2",
       headerTitleStyle: {
         fontWeight: "normal",
-        fontSize: RF(2.1)
+        // fontSize: RF(2.1)
       }
     }
   }
