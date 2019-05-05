@@ -15,7 +15,7 @@ import RF from "react-native-responsive-fontsize";
 export default class LoginHelper extends Component {
   
   static navigationOptions = {
-    title: 'Helper Login',
+    title: 'Moderator Login',
   }
 
   constructor(props) {
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
     },
 
     HMStyle: {
-      fontFamily: "Poppins",
+      fontFamily: "Poppins-Medium",
       fontSize: RF(4.5),
       color: "#158ec1"
     },
@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
 
     message: {
       alignSelf: "center",
-      fontFamily: "Poppins",
+      fontFamily: "Poppins-Light",
       fontSize: 17,
       color: "#158ec1"
     },

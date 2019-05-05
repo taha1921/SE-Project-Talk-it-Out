@@ -71,7 +71,6 @@ const styles = StyleSheet.create({
   },
 
   buttontext: {
-    fontFamily: "Poppins",
     fontSize: 20,
     color: "white"
   },
@@ -94,7 +93,7 @@ const styles = StyleSheet.create({
   },
 
   HMStyle: {
-    fontFamily: "Poppins",
+    fontFamily: "Poppins-Medium",
     fontSize: RF(4.5),
     color: "#158ec1"
   },

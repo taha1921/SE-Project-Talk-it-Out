@@ -53,13 +53,12 @@ const styles = StyleSheet.create({
   },
 
   buttontext: {
-    fontFamily: "Poppins",
     fontSize: 30,
     color: "white"
   },
 
   textstyle: {
-    fontFamily: "Poppins",
+    fontFamily: "Poppins-Medium",
     fontSize: 30,
     color: "#158ec1"
   },

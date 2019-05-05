@@ -181,7 +181,6 @@ export default class SeekerSignUp extends Component {
 
 const styles = StyleSheet.create({
   button: {
-    fontFamily: "Poppins",
     alignItems: "center",
     backgroundColor: "#244882",
     padding: 10,
@@ -192,13 +191,11 @@ const styles = StyleSheet.create({
   },
 
   buttontext: {
-    fontFamily: "Poppins",
     fontSize: 20,
     color: "white"
   },
 
   textstyle: {
-    fontFamily: "Poppins",
     fontSize: 15,
     color: "#536787"
   },
@@ -215,7 +212,7 @@ const styles = StyleSheet.create({
   },
 
   HMStyle: {
-    fontFamily: "Poppins",
+    fontFamily: "Poppins-Medium",
     fontSize: RF(4.5),
     color: "#158ec1"
   },
@@ -245,8 +242,8 @@ const styles = StyleSheet.create({
 
   message: {
     alignSelf: "center",
-    fontFamily: "Poppins",
-    fontSize: RF(2.5),
+    fontFamily: "Poppins-Light",
+    fontSize: RF(2.2),
     color: "#158ec1"
   },
 

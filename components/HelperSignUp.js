@@ -262,10 +262,13 @@ export default class HelperSignUp extends Component {
                     TouchableComponent= {TouchableOpacity}
                     customStyles={{
                         placeholderText: {
-                            color: '#158ec1'
+                            color: '#158ec1',
+                            fontFamily: 'Poppins-Light'
                         },
                         dateText: {
-                            color: '#158ec1'
+                            color: '#158ec1',
+                            fontFamily: 'Poppins-Light'
+
                         }
                     }}
                     onDateChange={(date) => { this.setState({ date: date }) }}
@@ -274,7 +277,7 @@ export default class HelperSignUp extends Component {
 
                 {/*Gender input*/}
                 <View style={styles.inputlayout}>
-                    <Text style={{alignSelf: 'center', color: '#158ec1', fontSize: RF(2.4), fontFamily: 'Poppins'}}>Choose Gender</Text>
+                    <Text style={{alignSelf: 'center', color: '#158ec1', fontSize: RF(2.4), fontFamily: 'Poppins-Regular'}}>Choose Gender</Text>
                     <Picker
                     selectedValue={this.state.gender}
                     onValueChange={(gender)=>{this.setState({gender: gender})}}
@@ -288,7 +291,7 @@ export default class HelperSignUp extends Component {
 
                 {/*Preferences Input*/}
                 <View style={styles.inputlayout}>
-                    <Text style={{alignSelf: 'center', color: '#158ec1', fontSize: RF(2.1), fontFamily: 'Poppins'}}>Issues you believe you can help seekers with (select atleast one)</Text>
+                    <Text style={{alignSelf: 'center', color: '#158ec1', fontSize: RF(1.9), fontFamily: 'Poppins-Regular'}}>Issues you believe you can help seekers with (select atleast one)</Text>
                     <CheckBox
                         center
                         title='Depression'
@@ -331,7 +334,7 @@ export default class HelperSignUp extends Component {
                     />
                 </View>
 
-                <View style={styles.submitbutton}>
+                <View>
                     <TouchableOpacity 
                     style={styles.button}
                     activeOpacity={0.5}
@@ -390,7 +393,7 @@ styles = StyleSheet.create({
   },
 
   HMStyle: {
-    fontFamily: "Poppins",
+    fontFamily: "Poppins-Medium",
     fontSize: 30,
     color: "#158ec1"
   },
