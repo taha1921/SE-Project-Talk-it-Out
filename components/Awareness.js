@@ -22,6 +22,18 @@ export default class Awareness extends Component {
         this.props.navigation.navigate('Auth');
     }
 
+    nav = async () => {
+        type = await AsyncStorage.getItem('usertype')
+
+        if (type == 'Helper') {
+            this.props.navigation.navigate('helper')
+        }
+
+        else if (type == 'Seeker') {
+            this.props.navigation.navigate('seeker')
+        }
+    }
+
     render() {
         return (
             <View style={styles.viewstyle}>
@@ -75,7 +87,7 @@ export default class Awareness extends Component {
                     </View>
                     <View>
                         <TouchableOpacity style={styles.button}
-                            onPress={() => this.props.navigation.navigate('Chat')}>
+                            onPress={this.nav}>
                             <Text style={styles.buttontext}>Chat</Text>
                         </TouchableOpacity>
                     </View>

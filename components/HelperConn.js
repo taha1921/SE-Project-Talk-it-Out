@@ -12,13 +12,12 @@ import {
     AsyncStorage,
 } from 'react-native';
 import RF from "react-native-responsive-fontsize";
-import User from "../User.js"
 import * as firebase from "firebase";
 import "firebase/firestore";
 import { ScrollView, FlatList } from 'react-native-gesture-handler';
 
 
-export default class HelperConnect extends Component {
+export default class HelperConn extends Component {
   
   static navigationOptions = {
     title: 'Connection Screen',
@@ -187,4 +186,4 @@ container :{
 
 });
 
-AppRegistry.registerComponent("HelperEmail", () => HelperEmail)
+AppRegistry.registerComponent("HelperConn", () => HelperConn)

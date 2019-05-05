@@ -12,7 +12,6 @@ import {
     AsyncStorage
 } from 'react-native';
 import RF from "react-native-responsive-fontsize";
-import User from "../User.js"
 import * as firebase from "firebase";
 import "firebase/firestore";
 
@@ -81,11 +80,12 @@ export default class LoginHelper extends Component {
                }
                else 
                {
-                AsyncStorage.setItem('useremail', email, () => {
-                  User.email = email
-                  User.usertype = "Seeker"
-                  nav.navigate('App')
+                AsyncStorage.setItem('usertype', "Seeker", () =>{
+                  AsyncStorage.setItem('useremail', email, () => {
+                    nav.navigate('App')
+                  })
                 })
+                
                }
              }
              else 
