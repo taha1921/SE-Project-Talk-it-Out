@@ -360,7 +360,6 @@ export default class HelperSignUp extends Component {
 
 styles = StyleSheet.create({
   button: {
-    fontFamily: "Poppins",
     alignItems: "center",
     backgroundColor: "#244882",
     padding: 10,
