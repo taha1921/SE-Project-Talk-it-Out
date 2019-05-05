@@ -22,6 +22,7 @@ import Therapist from "./components/CandT";
 import OnlineServices from "./components/onlineservices.js";
 import GenAware from "./components/generalawareness.js";
 import SuicideHotlines from "./components/suicidehelplines.js";
+import ConnectionSeeker from "./components/ConnectionSeeker.js";
 
 
 const AuthStack = createStackNavigator(
@@ -87,7 +88,7 @@ const CustomDrawer = (props) => (
   </SafeAreaView>
 )
 
-const AppStack = createDrawerNavigator (
+const AppStack = createDrawerNavigator(
   {
     Home: {
       screen: Awareness
@@ -105,7 +106,7 @@ const AppStack = createDrawerNavigator (
       screen: SuicideHotlines
     },
     Chat: {
-      screen: Chat
+      screen: ConnectionSeeker
     }
   },
 
@@ -118,7 +119,7 @@ const AppStack = createDrawerNavigator (
       },
       headerTintColor: "#929eb2",
       headerTitleStyle: {
-        fontWeight: "normal",
+        fontWeight: "normal"
         // fontSize: RF(2.1)
       }
     }
