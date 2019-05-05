@@ -99,9 +99,11 @@ const styles = StyleSheet.create({
         alignItems: "center",
         backgroundColor: "#244882",
         padding: 10,
-        alignSelf: "center",
-        width: Dimensions.get("window").width / 2.5,
-        borderRadius: 20
+        alignSelf: "stretch",
+        // width: Dimensions.get("window").width / 2.5,
+        borderRadius: 10,
+        height: Dimensions.get("window").height/15
+
     },
 
     buttontext: {
