@@ -14,6 +14,11 @@ import {CheckBox} from 'react-native-elements'
 
 export default class ConnectionSeeker extends Component {
     
+    static navigationOptions = {
+        title: 'Chat',
+    }
+
+
     constructor(props)
     {
         super(props)

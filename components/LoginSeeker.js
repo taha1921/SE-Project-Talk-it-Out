@@ -82,7 +82,7 @@ export default class LoginHelper extends Component {
                {
                 AsyncStorage.setItem('usertype', "Seeker", () =>{
                   AsyncStorage.setItem('useremail', email, () => {
-                    nav.navigate('App')
+                    nav.navigate('Seeker')
                   })
                 })
                 

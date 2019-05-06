@@ -23,14 +23,14 @@ export default class Awareness extends Component {
     }
 
     nav = async () => {
-        type = await AsyncStorage.getItem('usertype')
+        const type = await AsyncStorage.getItem('usertype')
 
         if (type == 'Helper') {
-            this.props.navigation.navigate('helper')
+            this.props.navigation.navigate('Helper')
         }
 
         else if (type == 'Seeker') {
-            this.props.navigation.navigate('seeker')
+            this.props.navigation.navigate('Seeker')
         }
     }
 
@@ -87,7 +87,7 @@ export default class Awareness extends Component {
                     </View>
                     <View>
                         <TouchableOpacity style={styles.button}
-                            onPress={this.nav}>
+                            onPress={() => this.props.navigation.navigate('chat')}>
                             <Text style={styles.buttontext}>Chat</Text>
                         </TouchableOpacity>
                     </View>
@@ -98,7 +98,7 @@ export default class Awareness extends Component {
                         </TouchableOpacity>
                     </View>
 
-
+                <TouchableOpacity onPress={async () => alert(await AsyncStorage.getItem('usertype'))}><Text style={{color: 'white'}}>Press</Text></TouchableOpacity>
                 </View>
             </View>
         );

@@ -20,8 +20,9 @@ import { ScrollView, FlatList } from 'react-native-gesture-handler';
 export default class HelperConn extends Component {
   
   static navigationOptions = {
-    title: 'Connection Screen',
+    title: 'Chat',
   }
+
 
   constructor(props) {
     super(props);

@@ -80,7 +80,7 @@ export default class LoginHelper extends Component {
                else {
                  AsyncStorage.setItem('usertype', "Helper", () => {
                    AsyncStorage.setItem('useremail', email, () => {
-                     nav.navigate('App')
+                     nav.navigate('Helper')
                    })
                  })
                }

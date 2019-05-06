@@ -4,6 +4,11 @@ import RF from "react-native-responsive-fontsize"
 
 export default class App extends React.Component {
     
+    static navigationOptions = {
+        title: 'General Awareness',
+    }
+
+
     render() {
         const data = {characters: [
             {id:123, name:'Lahore Mind Helpline', profession:'042-35761999'},

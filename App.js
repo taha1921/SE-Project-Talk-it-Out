@@ -109,6 +109,7 @@ const helperstack = createStackNavigator(
   }
 )
 
+
 const seekerstack = createStackNavigator(
   {
     connection: {
@@ -129,7 +130,7 @@ const seekerstack = createStackNavigator(
   }
 );
 
-const AppStack = createDrawerNavigator(
+const HelperStack = createDrawerNavigator(
   {
     Home: {
       screen: Awareness
@@ -146,10 +147,48 @@ const AppStack = createDrawerNavigator(
     SuicideHotlines: {
       screen: SuicideHotlines
     },
-    
-    helper: helperstack,
-    
-    seeker: seekerstack
+
+    Chat: helperstack
+      // screen: helperstack
+    // }
+  },
+
+  {
+    contentComponent: CustomDrawer,
+    initialRouteName: "Home",
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: "#1a2942"
+      },
+      headerTintColor: "#929eb2",
+      headerTitleStyle: {
+        fontWeight: "normal"
+      }
+    }
+  }
+);
+
+const SeekerStack = createDrawerNavigator(
+  {
+    Home: {
+      screen: Awareness
+    },
+    Therapist: {
+      screen: Therapist
+    },
+    OnlineServices: {
+      screen: OnlineServices
+    },
+    GenAware: {
+      screen: GenAware
+    },
+    SuicideHotlines: {
+      screen: SuicideHotlines
+    },
+
+    Chat: seekerstack
+      // screen: seekerstack
+    // }
   },
 
   {
@@ -171,7 +210,8 @@ const AppStack = createDrawerNavigator(
 export default createAppContainer(createSwitchNavigator(
   {
     AuthLoading: AuthLoadingScreen,
-    App: AppStack,
+    Helper: HelperStack,
+    Seeker: SeekerStack,
     Auth: AuthStack,
   },
   {
