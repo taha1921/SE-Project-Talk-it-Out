@@ -22,6 +22,8 @@ import Therapist from "./components/CandT";
 import OnlineServices from "./components/onlineservices.js";
 import GenAware from "./components/generalawareness.js";
 import SuicideHotlines from "./components/suicidehelplines.js";
+import ConnectionSeeker from "./components/ConnectionSeeker.js";
+import HelperConn from "./components/HelperConn.js";
 
 
 const AuthStack = createStackNavigator(
@@ -87,7 +89,47 @@ const CustomDrawer = (props) => (
   </SafeAreaView>
 )
 
-const AppStack = createDrawerNavigator (
+const helperstack = createStackNavigator(
+  {
+    connection: {
+      screen: HelperConn
+    }
+  },
+
+  {
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: "#1a2942"
+      },
+      headerTintColor: "#929eb2",
+      headerTitleStyle: {
+        fontWeight: "normal"
+      }
+    }
+  }
+)
+
+const seekerstack = createStackNavigator(
+  {
+    connection: {
+      screen: ConnectionSeeker
+    }
+  },
+
+  {
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: "#1a2942"
+      },
+      headerTintColor: "#929eb2",
+      headerTitleStyle: {
+        fontWeight: "normal"
+      }
+    }
+  }
+);
+
+const AppStack = createDrawerNavigator(
   {
     Home: {
       screen: Awareness
@@ -104,9 +146,10 @@ const AppStack = createDrawerNavigator (
     SuicideHotlines: {
       screen: SuicideHotlines
     },
-    Chat: {
-      screen: Chat
-    }
+    
+    helper: helperstack,
+    
+    seeker: seekerstack
   },
 
   {
@@ -118,22 +161,12 @@ const AppStack = createDrawerNavigator (
       },
       headerTintColor: "#929eb2",
       headerTitleStyle: {
-        fontWeight: "normal",
+        fontWeight: "normal"
         // fontSize: RF(2.1)
       }
     }
   }
 );
-// const AppContainer = createAppContainer(AuthStack);
-
-// export default class myapp extends Component{
-
-//   render() {
-//     return (
-//         <Chat/>
-//     );
-//   }
-// }
 
 export default createAppContainer(createSwitchNavigator(
   {

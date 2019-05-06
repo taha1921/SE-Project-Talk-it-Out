@@ -26,14 +26,14 @@ export default class App extends React.Component {
           
         return(
           <View style={styles.viewstyle2}>
-          <View style={{flex: 0.12, backgroundColor:'grey', height:100}}>
-                <Text
-                    adjustsFontSizeToFit={true}
-                    style={styles.textstyle}
-                >
-               General Awareness
-                </Text>
-            </View>
+                <View style={{flex: 0.12, backgroundColor:'grey', height:100}}>
+                    <Text
+                        adjustsFontSizeToFit={true}
+                        style={styles.textstyle}
+                    >
+                   General Awareness
+                    </Text>
+                </View>
 
             {/* <View style={{backgroundColor: '#008080', height:100, justifyContent:'space-between'}}>
                 <Text

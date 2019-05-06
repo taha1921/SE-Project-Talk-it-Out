@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
   },
 
   HMStyle: {
-    fontFamily: "Poppins",
+    fontFamily: "Poppins-Medium",
     fontSize: RF(4.5),
     color: "#158ec1"
   },
@@ -109,7 +109,8 @@ const styles = StyleSheet.create({
   seekeroption: {
     flex: 0.45,
     paddingTop: 20,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    alignItems: 'center'
   },
 
   helperoption: {
@@ -118,8 +119,8 @@ const styles = StyleSheet.create({
 
   message: {
     alignSelf: "center",
-    fontFamily: "Poppins",
-    fontSize: RF(3),
+    fontFamily: "Poppins-Light",
+    fontSize: RF(2.5),
     color: "#158ec1",
   }
 });

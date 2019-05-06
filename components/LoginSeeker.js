@@ -12,14 +12,13 @@ import {
     AsyncStorage
 } from 'react-native';
 import RF from "react-native-responsive-fontsize";
-import User from "../User.js"
 import * as firebase from "firebase";
 import "firebase/firestore";
 
 export default class LoginHelper extends Component {
   
   static navigationOptions = {
-    title: 'Helper Login',
+    title: 'Seeker Login',
   }
 
   constructor(props) {
@@ -81,11 +80,12 @@ export default class LoginHelper extends Component {
                }
                else 
                {
-                AsyncStorage.setItem('useremail', email, () => {
-                  User.email = email
-                  User.usertype = "Seeker"
-                  nav.navigate('App')
+                AsyncStorage.setItem('usertype', "Seeker", () =>{
+                  AsyncStorage.setItem('useremail', email, () => {
+                    nav.navigate('App')
+                  })
                 })
+                
                }
              }
              else 
@@ -186,7 +186,6 @@ export default class LoginHelper extends Component {
 
 const styles = StyleSheet.create({
   button: {
-    fontFamily: "Poppins",
     alignItems: "center",
     backgroundColor: "#244882",
     padding: 10,
@@ -196,13 +195,11 @@ const styles = StyleSheet.create({
   },
 
   buttontext: {
-    fontFamily: "Poppins",
     fontSize: 20,
     color: "white"
   },
 
   textstyle: {
-    fontFamily: "Poppins",
     fontSize: 15,
     color: "#536787"
   },
@@ -219,7 +216,7 @@ const styles = StyleSheet.create({
   },
 
   HMStyle: {
-    fontFamily: "Poppins",
+    fontFamily: "Poppins-Medium",
     fontSize: RF(4.5),
     color: "#158ec1"
   },
@@ -239,7 +236,7 @@ const styles = StyleSheet.create({
 
   message: {
     alignSelf: "center",
-    fontFamily: "Poppins",
+    fontFamily: "Poppins-Light",
     fontSize: 17,
     color: "#158ec1"
   },

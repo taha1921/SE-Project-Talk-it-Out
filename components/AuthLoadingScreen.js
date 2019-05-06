@@ -6,7 +6,6 @@ import {
     StatusBar,
     View,
 } from 'react-native';
-import User from "../User.js"
 
 export default class AuthLoadingScreen extends Component {
     constructor(props) {
@@ -16,8 +15,8 @@ export default class AuthLoadingScreen extends Component {
 
     // Fetch the token from storage then navigate to our appropriate place
     _bootstrapAsync = async () => {
-        User.email = await AsyncStorage.getItem('useremail');
-        this.props.navigation.navigate(User.email ? 'App' : 'Auth');
+        token = await AsyncStorage.getItem('useremail');
+        this.props.navigation.navigate(token ? 'App' : 'Auth');
     };
 
     // Render any loading content that you like here
