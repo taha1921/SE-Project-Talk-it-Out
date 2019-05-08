@@ -149,8 +149,6 @@ const HelperStack = createDrawerNavigator(
     },
 
     Chat: helperstack
-      // screen: helperstack
-    // }
   },
 
   {
@@ -187,8 +185,6 @@ const SeekerStack = createDrawerNavigator(
     },
 
     Chat: seekerstack
-      // screen: seekerstack
-    // }
   },
 
   {
