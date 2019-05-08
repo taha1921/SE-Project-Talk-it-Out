@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
 import RF from "react-native-responsive-fontsize"
+import { Header, Icon, Body, Title, Left } from "native-base";
 
 export default class App extends React.Component {
     static navigationOptions = {
@@ -24,6 +25,15 @@ export default class App extends React.Component {
                      {key:'The Parklane Clinic', prof:'042-35874685', address: '31 Street L, Block L Gulberg 2, Lahore, Punjab'}];
         return (
           <View style={styles.viewstyle2}>
+                <Header style={{ backgroundColor: '#1a2942' }}>
+                    <Left style={{ flex: 0.1, }}>
+                        <Icon name="menu" style={{ color: 'white' }} onPress={() => this.props.navigation.openDrawer()} />
+                    </Left>
+                    <Body style={{ alignItems: 'flex-start' }}>
+                        <Title>Counsellors and Therapists</Title>
+                    </Body>
+                </Header>
+
           <View style={{flex: 0.14, backgroundColor:'grey', height:100}}>
                 <Text
                     adjustsFontSizeToFit={false}

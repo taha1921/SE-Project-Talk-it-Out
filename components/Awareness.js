@@ -37,6 +37,7 @@ export default class Awareness extends Component {
     render() {
         return (
             <View style={styles.viewstyle}>
+
                 <Header style={{ backgroundColor: '#1a2942'}}>
                     <Left style = {{flex:0.1,}}>
                     <Icon name= "menu" style={{color: 'white'}} onPress={() => this.props.navigation.openDrawer()}/>
@@ -45,6 +46,7 @@ export default class Awareness extends Component {
                         <Title>Home</Title>
                     </Body>
                 </Header>
+
                 <View style={styles.HeaderStyle}>
                     <View style={styles.logostyle}>
                         <Text style={styles.textstyle}>Talk It Out</Text>
