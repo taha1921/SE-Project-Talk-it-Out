@@ -10,6 +10,8 @@ import {
 } from 'react-native';
 import RF from "react-native-responsive-fontsize";
 import { Header, Icon, Body, Title, Left } from 'native-base'
+import * as firebase from "firebase";
+import Fire from '../Fire.js';
 
 export default class Awareness extends Component {
 
@@ -17,9 +19,15 @@ export default class Awareness extends Component {
         title: 'Home',
     }
 
-    logout = async () => {
-        await AsyncStorage.clear();
-        this.props.navigation.navigate('Auth');
+    logout = () => {
+        const temp = this.props.navigation
+        firebase.auth().signOut().then(async function() {
+            await AsyncStorage.clear();
+            temp.navigate('Auth');
+          }).catch(function(error) {
+            // An error happened.
+            alert(error)
+          });
     }
 
     render() {
@@ -34,7 +42,7 @@ export default class Awareness extends Component {
                         <Title>Home</Title>
                     </Body>
                 </Header>
-
+                
                 <View style={styles.HeaderStyle}>
                     <View style={styles.logostyle}>
                         <Text style={styles.textstyle}>Talk It Out</Text>

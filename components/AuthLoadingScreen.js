@@ -15,7 +15,7 @@ export default class AuthLoadingScreen extends Component {
 
     // Fetch the token from storage then navigate to our appropriate place
     _bootstrapAsync = async () => {
-        token = await AsyncStorage.getItem('useremail');
+        token = await AsyncStorage.getItem('usertype');
         if(token)
         {
             type = await AsyncStorage.getItem('usertype')

@@ -60,8 +60,10 @@ const AuthStack = createStackNavigator(
       screen: LoginModerator
     },
 
+
+
   },
- 
+
   {
     initialRouteName: "Opening",
 
@@ -79,9 +81,9 @@ const AuthStack = createStackNavigator(
 );
 
 const CustomDrawer = (props) => (
-  <SafeAreaView style = {{flex: 1, backgroundColor: '#3e4b60'}}>
-    <View style = {{height: 150, backgroundColor: '#3e4b60', alignItems: 'center', justifyContent: 'center'}}>
-      <Image source = {require('./logo.png')} style = {{height: 120, width: 120, borderRadius: 60}} />
+  <SafeAreaView style={{ flex: 1, backgroundColor: '#3e4b60' }}>
+    <View style={{ height: 150, backgroundColor: '#3e4b60', alignItems: 'center', justifyContent: 'center' }}>
+      <Image source={require('./logo.png')} style={{ height: 120, width: 120, borderRadius: 60 }} />
     </View>
     <ScrollView>
       <DrawerItems {...props} />
@@ -93,7 +95,10 @@ const helperstack = createStackNavigator(
   {
     connection: {
       screen: HelperConn
-    }
+    },
+    Chatting: {
+      screen: Chat
+    },
   },
 
   {
@@ -107,6 +112,7 @@ const helperstack = createStackNavigator(
       }
     }
   }
+
 )
 
 
@@ -114,7 +120,10 @@ const seekerstack = createStackNavigator(
   {
     connection: {
       screen: ConnectionSeeker
-    }
+    },
+    Chatting: {
+      screen: Chat
+    },
   },
 
   {
@@ -147,6 +156,7 @@ const HelperStack = createDrawerNavigator(
     SuicideHotlines: {
       screen: SuicideHotlines
     },
+
 
     Chat: helperstack
   },

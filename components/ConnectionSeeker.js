@@ -11,13 +11,16 @@ import {
 } from 'react-native';
 import RF from 'react-native-responsive-fontsize'
 import {CheckBox} from 'react-native-elements'
+import * as firebase from "firebase";
+import 'firebase/firestore';
+import Fire from '../Fire.js';
 
 export default class ConnectionSeeker extends Component {
-    
+
     static navigationOptions = {
         title: 'Chat',
     }
-
+    
 
     constructor(props)
     {
@@ -36,6 +39,24 @@ export default class ConnectionSeeker extends Component {
 
     verify = () => {
         /*CONNECTION CODE HERE*/ 
+        const uid = Fire.shared.uid
+        var lol = "lol"
+        const req = {
+            "request": {
+                uid,
+            },
+
+            
+        };
+        firebase.firestore().collection("Helpers").get().then(function(querySnapshot) {
+
+            querySnapshot.forEach(function(doc) {
+                
+                var ref = firebase.database().ref(doc.id);
+                ref.push(req)
+
+            });
+        });
     }
     
     render() {

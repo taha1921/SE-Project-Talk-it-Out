@@ -58,56 +58,70 @@ export default class LoginHelper extends Component {
       /*
         WRITE LOGIN CODE HERE
       */
-       var db = firebase.firestore();
-       var email = this.state.email;
-       const nav = this.props.navigation;
-       firebase.auth().onAuthStateChanged(function (user) {
-
-         if (user) {
-           var helpers = db.collection("Helpers").doc(user.uid);
-           helpers.get().then(function (doc) {
-             if (doc.exists) {
-               if (!user.emailVerified) {
-                 alert("Please Verify your account")
-                 //Signing user out because we need the user to sign in again.
-                 firebase.auth().signOut().then(function () {
-                   //User has been signed out
-                 }).catch(function (error) {
-                   alert(error.message)
-                 });
-               }
-
-               else {
-                 AsyncStorage.setItem('usertype', "Helper", () => {
-                   AsyncStorage.setItem('useremail', email, () => {
-                     nav.navigate('Helper')
-                   })
-                 })
-               }
-             }
-
-             else {
-               // doc.data() will be undefined in this case
-               alert("Invalid Email or Password");
-               //Signing user out because we need the user to sign in again.
-               firebase.auth().signOut().then(function () {
-                 //User has been signed out
-               }).catch(function (error) {
-                 alert(error.message)
-               });
-             }
-           }).catch(function (error) {
-             alert("Error getting document:", error);
-           });
-
-         }
-
-       })
+       
+       
        firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).catch(function (error) {
          alert(error.message);
        });
+
      }
       
+}
+componentDidMount() {
+  var db = firebase.firestore();
+  var email = this.state.email;
+  const nav = this.props.navigation;
+   global.unsubscribe = firebase.auth().onAuthStateChanged(function (user) {
+
+    if (user) {
+      var helpers = db.collection("Helpers").doc(user.uid);
+      helpers.get().then(function (doc) {
+        if (doc.exists) {
+          if (!user.emailVerified) {
+            alert("Please Verify your account")
+            //Signing user out because we need the user to sign in again.
+            firebase.auth().signOut().then(function () {
+              //User has been signed out
+            }).catch(function (error) {
+              alert(error.message)
+            });
+          }
+
+          else {
+            AsyncStorage.setItem('usertype', "Helper", () => {
+              AsyncStorage.setItem('useremail', email, () => {
+                AsyncStorage.setItem('uid',user.uid, ()=>{
+                   nav.navigate('Helper')
+
+                })
+                // unsubscribe();
+              })
+            })
+          }
+        }
+
+        else {
+          // doc.data() will be undefined in this case
+          alert("Invalid Email or Password.");
+          //Signing user out because we need the user to sign in again.
+          firebase.auth().signOut().then(function () {
+            //User has been signed out
+          }).catch(function (error) {
+            alert(error.message)
+          });
+        }
+      }).catch(function (error) {
+        alert("Error getting document:", error);
+      });
+
+    }
+    
+
+
+  })
+}
+componentWillUnmount() {
+  global.unsubscribe()
 }
 
     render() {

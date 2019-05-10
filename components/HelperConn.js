@@ -15,14 +15,15 @@ import RF from "react-native-responsive-fontsize";
 import * as firebase from "firebase";
 import "firebase/firestore";
 import { ScrollView, FlatList } from 'react-native-gesture-handler';
+import Fire from '../Fire.js';
+
 
 
 export default class HelperConn extends Component {
   
   static navigationOptions = {
-    title: 'Chat',
+    title: 'Connection Requests',
   }
-
 
   constructor(props) {
     super(props);
@@ -33,8 +34,104 @@ export default class HelperConn extends Component {
         ListOfReq: [{key: "A"},{key: "B"},{key: "C"},{key: "D"},{key: "E"},{key: "F"},{key: "G"},{key: "H"}]
         
     }
-}
- 
+    
+  }
+  SendId = key =>{
+    // firebase.firestore().collection("Helpers").get().then(function(querySnapshot) {
+
+    //   querySnapshot.forEach(function(doc) {
+          
+    //       var ref = firebase.database().ref(doc.id);
+    //       ref.once('value', function(snapshot) {
+    //         snapshot.forEach(function (childSnapshot) {
+    
+    //             var value = childSnapshot.val();
+    //             if(value.request.uid){
+    //                 if(value.request.uid == key)
+    //                 {
+                        
+    //                     var key1 = childSnapshot.key
+    //                     ref.child(key1).remove()
+    
+    //                 }
+    
+    //             }
+    //             else{
+    //               alert("lol")
+    //             }
+                
+    //           });
+    //       });
+
+    //     });
+    // });
+    this.props.navigation.navigate('Chatting',{uid:key})
+  }
+
+  componentDidMount() {
+    var uid = Fire.shared.uid
+    var temp = this
+    if(!uid){
+        setTimeout(function(){ temp.SearchRequests(uid)},2000)
+    }else{
+      this.SearchRequests(uid)
+    }
+  }
+
+  SearchRequests = uid => {
+    uid = Fire.shared.uid
+
+    var ref = firebase.database().ref(uid);
+    const temp = this
+    ref.on('value', function(snapshot) {
+      try {
+        
+      
+      snapshot.forEach(function (childSnapshot) {
+
+        var value = childSnapshot.val();
+        console.log(value, "Value")
+        if(value.request.uid){
+          var present= false
+          temp.state.ListOfReq.forEach(element => {
+            if(element.key==value.request.uid)
+            {
+              present = true
+            }
+          })
+
+          if(!present)
+          {
+            var joined = temp.state.ListOfReq.concat({key:value.request.uid});
+
+            temp.setState({
+              ListOfReq: joined,
+            });
+          }
+
+          
+        }
+        else{
+          // alert("lol")
+        }
+        
+      });
+    } catch (error) {
+        
+    }
+    });
+  }
+  
+
+
+  componentWillUnmount() {
+    var uid = Fire.shared.uid
+
+    var ref = firebase.database().ref(uid);
+
+    ref.off();
+  }
+
 
     render() {
         return (
@@ -57,7 +154,7 @@ export default class HelperConn extends Component {
 
               renderItem={({item})=>(
                 <View>
-                <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('')}>
+                <TouchableOpacity style={styles.button} onPress={() => this.SendId(item.key)}>
                     <Text style={styles.buttontext}> {item.key} </Text>
                 </TouchableOpacity>
                 </View>
