@@ -22,18 +22,6 @@ export default class Awareness extends Component {
         this.props.navigation.navigate('Auth');
     }
 
-    nav = async () => {
-        const type = await AsyncStorage.getItem('usertype')
-
-        if (type == 'Helper') {
-            this.props.navigation.navigate('Helper')
-        }
-
-        else if (type == 'Seeker') {
-            this.props.navigation.navigate('Seeker')
-        }
-    }
-
     render() {
         return (
             <View style={styles.viewstyle}>
