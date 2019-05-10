@@ -72,7 +72,8 @@ export default class Chat extends Component {
         }
     };
 
-    render() {       
+    render() {
+        alert(this.props.navigation.getParam('uid', "No-UID"))
         return (
             <GiftedChat
                 messages={this.state.messages}

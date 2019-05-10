@@ -24,7 +24,7 @@ import GenAware from "./components/generalawareness.js";
 import SuicideHotlines from "./components/suicidehelplines.js";
 import ConnectionSeeker from "./components/ConnectionSeeker.js";
 import HelperConn from "./components/HelperConn.js";
-
+import ConnectionHelper from "./components/ConnectionHelper.js";
 
 const AuthStack = createStackNavigator(
   {
@@ -93,6 +93,9 @@ const CustomDrawer = (props) => (
 
 const helperstack = createStackNavigator(
   {
+    connected: {
+      screen: ConnectionHelper
+    },
     connection: {
       screen: HelperConn
     },

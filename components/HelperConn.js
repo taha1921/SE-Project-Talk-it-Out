@@ -36,7 +36,7 @@ export default class HelperConn extends Component {
     }
     
   }
-  SendId = key =>{
+  SendId = Key =>{
     // firebase.firestore().collection("Helpers").get().then(function(querySnapshot) {
 
     //   querySnapshot.forEach(function(doc) {
@@ -65,7 +65,8 @@ export default class HelperConn extends Component {
 
     //     });
     // });
-    this.props.navigation.navigate('Chatting',{uid:key})
+    this.props.navigation.state.params.onGoBack({key:Key})
+    this.props.navigation.goBack()
   }
 
   componentDidMount() {
