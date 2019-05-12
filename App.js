@@ -25,6 +25,7 @@ import SuicideHotlines from "./components/suicidehelplines.js";
 import ConnectionSeeker from "./components/ConnectionSeeker.js";
 import HelperConn from "./components/HelperConn.js";
 import ConnectionHelper from "./components/ConnectionHelper.js";
+import SeekerConn from "./components/SeekerConn.js";
 
 const AuthStack = createStackNavigator(
   {
@@ -122,11 +123,16 @@ const helperstack = createStackNavigator(
 const seekerstack = createStackNavigator(
   {
     connection: {
+      screen: SeekerConn
+    },
+
+    request: {
       screen: ConnectionSeeker
     },
+
     Chatting: {
       screen: Chat
-    },
+    }
   },
 
   {

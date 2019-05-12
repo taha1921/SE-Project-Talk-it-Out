@@ -31,7 +31,7 @@ export default class HelperConn extends Component {
         email: '',
         password: '',
         loader: false,
-        ListOfReq: [{key: "A"},{key: "B"},{key: "C"},{key: "D"},{key: "E"},{key: "F"},{key: "G"},{key: "H"}]
+        ListOfReq: []
         
     }
     
