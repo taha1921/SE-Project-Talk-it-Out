@@ -47,10 +47,10 @@ export default class ConnectionHelper extends Component{
                         <FlatList data = {this.state.uidlist}
                         contentContainerStyle={styles.container}
                         
-                            renderItem={({ item }) => (
+                            renderItem={({ item, index }) => (
                                 <View>
                                     <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("Chatting",{uid: item.key})}>
-                                        <Text style={styles.buttontext}> {item.key} </Text>
+                                        <Text style={styles.buttontext}> Seeker {index+1} </Text>
                                     </TouchableOpacity>
                                 </View>
 

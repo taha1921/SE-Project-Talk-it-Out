@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import {
-    ActivityIndicator,
-    AppRegistry,
-    StyleSheet,
-    Text,
-    View,
-    TouchableOpacity,
-    Dimensions,
-    TextInput,
-    KeyboardAvoidingView,
-    AsyncStorage,
+  ActivityIndicator,
+  AppRegistry,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Dimensions,
+  TextInput,
+  KeyboardAvoidingView,
+  AsyncStorage,
 } from 'react-native';
 import RF from "react-native-responsive-fontsize";
 import * as firebase from "firebase";
@@ -20,7 +20,7 @@ import Fire from '../Fire.js';
 
 
 export default class HelperConn extends Component {
-  
+
   static navigationOptions = {
     title: 'Connection Requests',
   }
@@ -28,53 +28,68 @@ export default class HelperConn extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        email: '',
-        password: '',
-        loader: false,
-        ListOfReq: []
-        
+      email: '',
+      password: '',
+      loader: false,
+      ListOfReq: []
+
     }
-    
+
   }
   SendId = Key =>{
     // firebase.firestore().collection("Helpers").get().then(function(querySnapshot) {
 
     //   querySnapshot.forEach(function(doc) {
-          
-    //       var ref = firebase.database().ref(doc.id);
+
+    //       var ref = firebase.database().ref(doc.id+ '/Requests/');
     //       ref.once('value', function(snapshot) {
     //         snapshot.forEach(function (childSnapshot) {
-    
+
     //             var value = childSnapshot.val();
     //             if(value.request.uid){
     //                 if(value.request.uid == key)
     //                 {
-                        
+
     //                     var key1 = childSnapshot.key
     //                     ref.child(key1).remove()
-    
+
     //                 }
-    
+
     //             }
     //             else{
     //               alert("lol")
     //             }
-                
+
     //           });
     //       });
 
     //     });
     // });
-    this.props.navigation.state.params.onGoBack({key:Key})
-    this.props.navigation.goBack()  
+    var uid = Fire.shared.uid
+    var ref = firebase.database().ref(Key + '/CurrentlyConnected/');
+    const connect = {
+      uid
+    }
+
+    ref.push(connect)
+    ref = firebase.database().ref(uid + '/CurrentlyConnected/');
+    const second = {
+      Key
+    }
+    ref.push(second)
+
+
+
+    this.props.navigation.state.params.onGoBack({ key: Key })
+    this.props.navigation.goBack()
   }
 
   componentDidMount() {
     var uid = Fire.shared.uid
     var temp = this
-    if(!uid){
-        setTimeout(function(){ temp.SearchRequests(uid)},2000)
-    }else{
+    if (!uid) {
+      setTimeout(function () { temp.SearchRequests(uid) }, 2000)
+    } else {
       this.SearchRequests(uid)
     }
   }
@@ -82,46 +97,44 @@ export default class HelperConn extends Component {
   SearchRequests = uid => {
     uid = Fire.shared.uid
 
-    var ref = firebase.database().ref(uid);
+    var ref = firebase.database().ref(uid + '/Requests/');
     const temp = this
-    ref.on('value', function(snapshot) {
+    ref.on('value', function (snapshot) {
       try {
-        
-      
-      snapshot.forEach(function (childSnapshot) {
 
-        var value = childSnapshot.val();
-        if(value.request.uid){
-          var present= false
-          temp.state.ListOfReq.forEach(element => {
-            if(element.key==value.request.uid)
-            {
-              present = true
+
+        snapshot.forEach(function (childSnapshot) {
+
+          var value = childSnapshot.val();
+          if (value.request.uid) {
+            var present = false
+            temp.state.ListOfReq.forEach(element => {
+              if (element.key == value.request.uid) {
+                present = true
+              }
+            })
+
+            if (!present) {
+              var joined = temp.state.ListOfReq.concat({ key: value.request.uid });
+
+              temp.setState({
+                ListOfReq: joined,
+              });
             }
-          })
 
-          if(!present)
-          {
-            var joined = temp.state.ListOfReq.concat({key:value.request.uid});
 
-            temp.setState({
-              ListOfReq: joined,
-            });
+          }
+          else {
+            // alert("lol")
           }
 
-          
-        }
-        else{
-          // alert("lol")
-        }
-        
-      });
-    } catch (error) {
-        
-    }
+        });
+      } catch (error) {
+
+      }
     });
   }
-  
+
 
 
   componentWillUnmount() {
@@ -133,50 +146,50 @@ export default class HelperConn extends Component {
   }
 
 
-    render() {
-        return (
-          <View style={styles.viewstyle}>
-              <View style={styles.HeaderStyle}>
-              <View style={styles.logostyle}>
-                          <Text style={styles.textstyle}>Talk It Out </Text>
-                      </View>    
-                      <View style={styles.Headermessage}>
-                        <Text style={styles.HMStyle}>Connection Screen</Text>
-                    </View>
+  render() {
+    return (
+      <View style={styles.viewstyle}>
+        <View style={styles.HeaderStyle}>
+          <View style={styles.logostyle}>
+            <Text style={styles.textstyle}>Talk It Out </Text>
+          </View>
+          <View style={styles.Headermessage}>
+            <Text style={styles.HMStyle}>Connection Screen</Text>
+          </View>
+
+        </View>
+        <View style={{ flex: 1 }}>
+          {
+
+            this.state.ListOfReq.length > 0 ?
+              <FlatList data={this.state.ListOfReq}
+                contentContainerStyle={styles.container}
+
+                renderItem={({ item }) => (
+                  <View>
+                    <TouchableOpacity style={styles.button} onPress={() => this.SendId(item.key)}>
+                      <Text style={styles.buttontext}> {item.key} </Text>
+                    </TouchableOpacity>
+                  </View>
+
+
+                )}
+              />
+
+              :
+              <View>
+                <Text> NO Request </Text>
 
               </View>
-            <View style = {{flex : 1}}>
-            {
-              
-              this.state.ListOfReq.length > 0 ?
-              <FlatList  data = {this.state.ListOfReq}
-              contentContainerStyle={styles.container}
-
-              renderItem={({item})=>(
-                <View>
-                <TouchableOpacity style={styles.button} onPress={() => this.SendId(item.key)}>
-                    <Text style={styles.buttontext}> {item.key} </Text>
-                </TouchableOpacity>
-                </View>
-    
-
-              )}
-              />
-              
-            :
-            <View>
-            <Text> NO Request </Text>
-
-            </View>
 
 
-            }
-          
+          }
 
-            </View>
-          </View>
-        );
-    }
+
+        </View>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -276,11 +289,11 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     width: Dimensions.get("window").width,
     borderRadius: 20
-},
-container :{
-  justifyContent : "space-evenly",
-  flex : 0.8,
-}
+  },
+  container: {
+    justifyContent: "space-evenly",
+    flex: 0.8,
+  }
 
 });
 
