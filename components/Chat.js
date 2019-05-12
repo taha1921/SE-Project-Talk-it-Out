@@ -41,8 +41,12 @@ export default class Chat extends Component {
     }
 
     parse = snapshot => {
-        var key = snapshot.key
-        this.recvRef.child(key).remove()
+        temp = this
+        setTimeout(function () {
+            var key = snapshot.key
+            temp.recvRef.child(key).remove()
+        }, 3000);
+
         const { timestamp: numberStamp, text, user } = snapshot.val();
         const { key: _id } = snapshot;
         const timestamp = new Date(numberStamp);
@@ -92,7 +96,7 @@ export default class Chat extends Component {
     };
 
     render() {
-        AsyncStorage.setItem("messages/" + this.uid, JSON.stringify([...new Set(this.state.messages)]))
+        AsyncStorage.setItem("messages/" + this.uid, JSON.stringify((this.state.messages)))
         return (
             <GiftedChat
                 messages={this.state.messages}
@@ -103,10 +107,7 @@ export default class Chat extends Component {
     }
 
 
-
-    componentDidMount() {
-
-
+    componentWillMount() {
         AsyncStorage.getItem("messages/" + this.uid).then(val => {
             if (val) {
                 const temp = this
@@ -116,13 +117,17 @@ export default class Chat extends Component {
                 )
             }
 
-
-
-
         })
+    }
+
+
+    componentDidMount() {
+
+
+
         const temp = this
         temp.on(message => {
-            if (this.state.messages.includes(message)) {
+            if (temp.state.messages.some(e => e._id == message._id)) {
             }
             else {
                 temp.setState(previousState => {
@@ -138,8 +143,7 @@ export default class Chat extends Component {
         );
 
         temp.on1(message => {
-
-            if (this.state.messages.includes(message)) {
+            if (temp.state.messages.some(e => e._id == message._id)) {
             }
             else {
                 temp.setState(previousState => {

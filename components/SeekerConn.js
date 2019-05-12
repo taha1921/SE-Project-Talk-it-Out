@@ -6,7 +6,8 @@ import {
     StyleSheet,
     Dimensions,
     TouchableOpacity,
-    FlatList
+    FlatList,
+    Alert
 } from 'react-native'
 import * as firebase from "firebase";
 import 'firebase/firestore';
@@ -82,6 +83,9 @@ export default class SeekerConn extends Component{
         }
     }
     
+    endchat = () => {
+        /*BASIT CODE HERE*/
+    }
     render() {
         return (
              <View style={styles.viewstyle}>
@@ -100,10 +104,25 @@ export default class SeekerConn extends Component{
                             <FlatList data={this.state.uidlist}
                                 contentContainerStyle={styles.container}
 
-                                renderItem={({item}) => (
+                                renderItem={({item, index}) => (
                                     <View>
-                                        <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("Chatting", { uid: item.key })}>
-                                            <Text style={styles.buttontext}> {item.key} </Text>
+                                        <TouchableOpacity 
+                                        style={styles.button} 
+                                        onPress={() => this.props.navigation.navigate("Chatting", { uid: item.key })}
+                                            onLongPress={() => Alert.alert(
+                                                'End Chat Session',
+                                                'Would you like to end your chat session with the helper?',
+                                                [
+                                                    {
+                                                        text: 'Cancel',
+                                                        onPress: () => console.log('Cancel Pressed'),
+                                                        style: 'cancel',
+                                                    },
+                                                    { text: 'OK', onPress: () => this.endchat },
+                                                ],
+                                                { cancelable: false },
+                                            )}>
+                                            <Text style={styles.buttontext}> Helper {index + 1} </Text>
                                         </TouchableOpacity>
                                     </View>
 
@@ -145,6 +164,7 @@ const styles = StyleSheet.create({
 
   container: {
     justifyContent: "space-evenly",
+    
     }
 });
 
