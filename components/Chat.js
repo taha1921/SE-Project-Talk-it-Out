@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry } from 'react-native'
+import { AppRegistry, AsyncStorage } from 'react-native'
 import { GiftedChat } from 'react-native-gifted-chat'; // 0.3.0
 import * as firebase from "firebase";
 
@@ -24,23 +24,38 @@ export default class Chat extends Component {
         };
     }
 
-    get uid(){
+    get uid() {
         return this.props.navigation.state.params.uid
     }
-    get sendRef(){
-        return firebase.database().ref(this.uid+'/messages/'+Fire.shared.uid);
+    get sendRef() {
+        return firebase.database().ref(this.uid + '/messages/' + Fire.shared.uid);
     }
 
-    get recvRef(){
-        return firebase.database().ref(Fire.shared.uid+'/messages/'+this.uid);
+    get recvRef() {
+        return firebase.database().ref(Fire.shared.uid + '/messages/' + this.uid);
 
     }
-    
+
     update = () => {
 
     }
 
     parse = snapshot => {
+        var key = snapshot.key
+        this.recvRef.child(key).remove()
+        const { timestamp: numberStamp, text, user } = snapshot.val();
+        const { key: _id } = snapshot;
+        const timestamp = new Date(numberStamp);
+        const message = {
+            _id,
+            timestamp,
+            text,
+            user,
+        };
+
+        return message;
+    };
+    parse1 = snapshot => {
         const { timestamp: numberStamp, text, user } = snapshot.val();
         const { key: _id } = snapshot;
         const timestamp = new Date(numberStamp);
@@ -60,6 +75,10 @@ export default class Chat extends Component {
         this.recvRef.limitToLast(20).on('child_added', snapshot => callback(this.parse(snapshot)));
     }
 
+    on1 = callback => {
+        this.sendRef.limitToLast(20).on('child_added', snapshot => callback(this.parse1(snapshot)));
+    }
+
     send = messages => {
         for (let i = 0; i < messages.length; i++) {
             const { text, user } = messages[i];
@@ -73,7 +92,7 @@ export default class Chat extends Component {
     };
 
     render() {
-        alert(this.props.navigation.getParam('uid', "No-UID"))
+        AsyncStorage.setItem("messages/" + this.uid, JSON.stringify([...new Set(this.state.messages)]))
         return (
             <GiftedChat
                 messages={this.state.messages}
@@ -83,16 +102,61 @@ export default class Chat extends Component {
         );
     }
 
+
+
     componentDidMount() {
+
+
+        AsyncStorage.getItem("messages/" + this.uid).then(val => {
+            if (val) {
+                const temp = this
+                temp.setState({
+                    messages: JSON.parse(val),
+                }
+                )
+            }
+
+
+
+
+        })
         const temp = this
         temp.on(message => {
-            alert(message.text)
-            temp.setState(previousState => ({
-                messages: GiftedChat.append(previousState.messages, message),
-            }))}
+            if (this.state.messages.includes(message)) {
+            }
+            else {
+                temp.setState(previousState => {
+                    if (previousState.messages.includes(message)) {
+                        return {}
+                    }
+                    return {
+                        messages: GiftedChat.append(previousState.messages, message),
+                    }
+                })
+            }
+        }
+        );
+
+        temp.on1(message => {
+
+            if (this.state.messages.includes(message)) {
+            }
+            else {
+                temp.setState(previousState => {
+                    if (previousState.messages.includes(message)) {
+                        return {}
+                    }
+                    return {
+                        messages: GiftedChat.append(previousState.messages, message),
+                    }
+                })
+            }
+        }
+
         );
     }
     componentWillUnmount() {
+        this.recvRef.off();
         this.sendRef.off();
     }
 }

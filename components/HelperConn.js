@@ -66,7 +66,7 @@ export default class HelperConn extends Component {
     //     });
     // });
     this.props.navigation.state.params.onGoBack({key:Key})
-    this.props.navigation.goBack()
+    this.props.navigation.goBack()  
   }
 
   componentDidMount() {
@@ -91,7 +91,6 @@ export default class HelperConn extends Component {
       snapshot.forEach(function (childSnapshot) {
 
         var value = childSnapshot.val();
-        console.log(value, "Value")
         if(value.request.uid){
           var present= false
           temp.state.ListOfReq.forEach(element => {

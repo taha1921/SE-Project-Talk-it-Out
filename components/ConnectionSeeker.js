@@ -38,7 +38,6 @@ export default class ConnectionSeeker extends Component {
     }
 
     verify = () => {
-        /*CONNECTION CODE HERE*/ 
         const uid = Fire.shared.uid
         var lol = "lol"
         const req = {
