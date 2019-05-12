@@ -29,6 +29,47 @@ export default class SeekerConn extends Component{
 
     SearchConnections = uid => {
         uid = Fire.shared.uid
+
+        var ref2 = firebase.database().ref(uid+ '/PreviouslyConnected/');
+        ref2.once('value', function(snapshot) {
+            try {
+              
+              // alert(uid)
+            
+            snapshot.forEach(function (childSnapshot) {
+      
+              var value = childSnapshot.val();
+              console.log(value)
+              if(value.Key){
+                var present= false
+  
+                temp.state.uidlist.forEach(element => {
+                  if(element.key==value.Key)
+                  {
+                    present = true
+                  }
+                })
+      
+                if(!present)
+                {
+                  var joined = temp.state.uidlist.concat({key:value.Key});
+                  // alert(key)
+                  temp.setState({
+                    uidlist: joined,
+                  });
+                }
+      
+                
+              }
+              else{
+                alert("lol")
+              }
+              
+            });
+          } catch (error) {
+              alert(error)
+          }
+          });
     
         var ref = firebase.database().ref(uid+ '/CurrentlyConnected/');
         const temp = this
@@ -71,7 +112,9 @@ export default class SeekerConn extends Component{
             alert(error)
         }
         });
-      }
+
+        
+    }
 
       componentDidMount() {
         var uid = Fire.shared.uid
@@ -82,10 +125,73 @@ export default class SeekerConn extends Component{
           this.SearchConnections(uid)
         }
     }
+
+    componentWillUnmount() {
+        var uid = Fire.shared.uid
     
-    endchat = (item) => {
+        var ref = firebase.database().ref(uid+'/CurrentlyConnected/');
+    
+        ref.off();
+      }
+    
+    endchat = (Key) => {
+        
         /*BASIT CODE HERE*/
-        console.log(item)
+        var uid = Fire.shared.uid
+        var ref1 = firebase.database().ref(Key + '/CurrentlyConnected/');
+        const connect = {
+        uid
+        }
+        ref1.once('value', function(snapshot) {
+            snapshot.forEach(function (childSnapshot) {
+
+                var value = childSnapshot.val();
+                if(value.Key){
+                    if(value.Key == uid)
+                    {
+
+                        var key1 = childSnapshot.key
+                        ref1.child(key1).remove()
+
+                    }
+
+                }
+                else{
+                  alert("lol")
+                }
+
+              });
+          });
+        ref1 = firebase.database().ref(Key + '/PreviouslyConnected/');
+        ref1.push(connect)
+        ref1 = firebase.database().ref(Key + '/ToBeDeleted/');
+        ref1.push(connect)
+        var ref2 = firebase.database().ref(uid + '/CurrentlyConnected/');
+        ref2.once('value', function(snapshot) {
+            snapshot.forEach(function (childSnapshot) {
+
+                var value = childSnapshot.val();
+                if(value.uid){
+                    if(value.uid == Key)
+                    {
+
+                        var key1 = childSnapshot.key
+                        ref2.child(key1).remove()
+
+                    }
+
+                }
+                else{
+                  alert("lol")
+                }
+
+              });
+          });
+        const second = {
+        Key
+        }
+        ref2 = firebase.database().ref(uid + '/PreviouslyConnected/');
+        ref2.push(second)
     }
     render() {
         return (

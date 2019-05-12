@@ -140,7 +140,7 @@ export default class HelperConn extends Component {
   componentWillUnmount() {
     var uid = Fire.shared.uid
 
-    var ref = firebase.database().ref(uid);
+    var ref = firebase.database().ref(uid+'/Requests/');
 
     ref.off();
   }

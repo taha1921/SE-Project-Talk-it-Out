@@ -7,6 +7,7 @@ import {
     Dimensions,
     TouchableOpacity,
     FlatList,
+    AsyncStorage,
     Alert
 } from 'react-native';
 import * as firebase from "firebase";
@@ -33,11 +34,22 @@ export default class ConnectionHelper extends Component{
         await this.setState({
             uidlist: getuid,
           });
-          alert(this.state.uidlist[0].key)
     }
 
     SearchConnections = uid => {
         uid = Fire.shared.uid
+
+        var ref1 = firebase.database().ref(Fire.shared.uid+ '/ToBeDeleted/');
+          ref1.once('value', function(snapshot) {
+            snapshot.forEach(function (childSnapshot) {
+
+                var value = childSnapshot.val();
+                AsyncStorage.removeItem("messages/"+value.uid);
+                var key1 = childSnapshot.key
+                ref1.child(key1).remove()
+
+              });
+          });
     
         var ref = firebase.database().ref(uid+ '/CurrentlyConnected/');
         const temp = this
@@ -91,6 +103,14 @@ export default class ConnectionHelper extends Component{
           this.SearchConnections(uid)
         }
     }
+
+    componentWillUnmount() {
+        var uid = Fire.shared.uid
+    
+        var ref = firebase.database().ref(uid+'/CurrentlyConnected/');
+    
+        ref.off();
+      }
 
 
     render()

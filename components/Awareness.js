@@ -22,7 +22,7 @@ export default class Awareness extends Component {
     logout = () => {
         const temp = this.props.navigation
         firebase.auth().signOut().then(async function() {
-            await AsyncStorage.clear();
+            await AsyncStorage.removeItem('usertype');
             temp.navigate('Auth');
           }).catch(function(error) {
             // An error happened.
