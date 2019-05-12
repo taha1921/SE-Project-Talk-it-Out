@@ -83,8 +83,9 @@ export default class SeekerConn extends Component{
         }
     }
     
-    endchat = () => {
+    endchat = (item) => {
         /*BASIT CODE HERE*/
+        console.log(item)
     }
     render() {
         return (
@@ -118,7 +119,7 @@ export default class SeekerConn extends Component{
                                                         onPress: () => console.log('Cancel Pressed'),
                                                         style: 'cancel',
                                                     },
-                                                    { text: 'OK', onPress: () => this.endchat },
+                                                    { text: 'OK', onPress: () => this.endchat(item.key) },
                                                 ],
                                                 { cancelable: false },
                                             )}>
