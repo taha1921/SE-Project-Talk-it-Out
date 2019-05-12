@@ -41,7 +41,7 @@ export default class HelperConn extends Component {
 
     //   querySnapshot.forEach(function(doc) {
           
-    //       var ref = firebase.database().ref(doc.id);
+    //       var ref = firebase.database().ref(doc.id+ '/Requests/');
     //       ref.once('value', function(snapshot) {
     //         snapshot.forEach(function (childSnapshot) {
     
@@ -65,6 +65,21 @@ export default class HelperConn extends Component {
 
     //     });
     // });
+    var uid = Fire.shared.uid
+    var ref = firebase.database().ref(Key + '/CurrentlyConnected/');
+    const connect = {
+      uid
+    }
+
+    ref.push(connect)
+    ref = firebase.database().ref(uid + '/CurrentlyConnected/');
+    const second = {
+      Key
+    }
+    ref.push(second)
+
+
+    
     this.props.navigation.state.params.onGoBack({key:Key})
     this.props.navigation.goBack()  
   }
@@ -82,7 +97,7 @@ export default class HelperConn extends Component {
   SearchRequests = uid => {
     uid = Fire.shared.uid
 
-    var ref = firebase.database().ref(uid);
+    var ref = firebase.database().ref(uid+'/Requests/');
     const temp = this
     ref.on('value', function(snapshot) {
       try {

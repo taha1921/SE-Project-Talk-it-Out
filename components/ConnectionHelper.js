@@ -8,6 +8,10 @@ import {
     TouchableOpacity,
     FlatList
 } from 'react-native';
+import * as firebase from "firebase";
+import 'firebase/firestore';
+import Fire from '../Fire.js';
+
 
 export default class ConnectionHelper extends Component{
 
@@ -30,6 +34,63 @@ export default class ConnectionHelper extends Component{
           });
           alert(this.state.uidlist[0].key)
     }
+
+    SearchConnections = uid => {
+        uid = Fire.shared.uid
+    
+        var ref = firebase.database().ref(uid+ '/CurrentlyConnected/');
+        const temp = this
+        ref.on('value', function(snapshot) {
+          try {
+            
+            // alert(uid)
+          
+          snapshot.forEach(function (childSnapshot) {
+    
+            var value = childSnapshot.val();
+            console.log(value)
+            if(value.Key){
+              var present= false
+
+              temp.state.uidlist.forEach(element => {
+                if(element.key==value.Key)
+                {
+                  present = true
+                }
+              })
+    
+              if(!present)
+              {
+                var joined = temp.state.uidlist.concat({key:value.Key});
+                // alert(key)
+                temp.setState({
+                  uidlist: joined,
+                });
+              }
+    
+              
+            }
+            else{
+              alert("lol")
+            }
+            
+          });
+        } catch (error) {
+            alert(error)
+        }
+        });
+      }
+
+    componentDidMount() {
+        var uid = Fire.shared.uid
+        var temp = this
+        if(!uid){
+            setTimeout(function(){ temp.SearchConnections(uid)},2000)
+        }else{
+          this.SearchConnections(uid)
+        }
+    }
+
 
     render()
     {

@@ -51,7 +51,7 @@ export default class ConnectionSeeker extends Component {
 
             querySnapshot.forEach(function(doc) {
                 
-                var ref = firebase.database().ref(doc.id);
+                var ref = firebase.database().ref(doc.id+'/Requests/');
                 ref.push(req)
 
             });

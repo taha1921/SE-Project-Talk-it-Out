@@ -103,10 +103,7 @@ export default class Chat extends Component {
     }
 
 
-
-    componentDidMount() {
-
-
+    componentWillMount() {
         AsyncStorage.getItem("messages/" + this.uid).then(val => {
             if (val) {
                 const temp = this
@@ -116,13 +113,18 @@ export default class Chat extends Component {
                 )
             }
 
-
-
-
         })
+    }
+
+
+    componentDidMount() {
+
+
+        
         const temp = this
         temp.on(message => {
-            if (this.state.messages.includes(message)) {
+            console(message)
+            if(temp.state.messages.some(e => e.key == message.key)) {
             }
             else {
                 temp.setState(previousState => {
@@ -139,7 +141,7 @@ export default class Chat extends Component {
 
         temp.on1(message => {
 
-            if (this.state.messages.includes(message)) {
+            if(temp.state.messages.some(e => e.key == message.key)) {
             }
             else {
                 temp.setState(previousState => {
