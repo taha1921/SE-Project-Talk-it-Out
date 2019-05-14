@@ -3,7 +3,7 @@ import {
   AppRegistry, View,
   Text, TouchableOpacity,
   AsyncStorage, SafeAreaView,
-  ScrollView, Image
+  ScrollView, Image, Button
 } from 'react-native';
 import { createStackNavigator, createAppContainer, createSwitchNavigator, createDrawerNavigator, DrawerItems } from "react-navigation";
 import OpeningScreen from './components/OpeningScreen.js';
@@ -26,6 +26,8 @@ import ConnectionSeeker from "./components/ConnectionSeeker.js";
 import HelperConn from "./components/HelperConn.js";
 import ConnectionHelper from "./components/ConnectionHelper.js";
 import SeekerConn from "./components/SeekerConn.js";
+import * as firebase from "firebase";
+
 
 const AuthStack = createStackNavigator(
   {
@@ -88,6 +90,19 @@ const CustomDrawer = (props) => (
     </View>
     <ScrollView>
       <DrawerItems {...props} />
+      <Button title="Logout" onPress = {
+        () => {
+          const temp = props.navigation
+          firebase.auth().signOut().then(async function () {
+            await AsyncStorage.removeItem('usertype');
+            temp.navigate('Auth');
+          }).catch(function (error) {
+            // An error happened.
+            alert(error)
+          });
+        }
+      }
+      />
     </ScrollView>
   </SafeAreaView>
 )
