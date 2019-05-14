@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import {
     AppRegistry,
     View,
@@ -14,141 +14,136 @@ import 'firebase/firestore';
 import Fire from '../Fire.js';
 
 
-export default class SeekerConn extends Component{
-    static navigationOptions ={
+export default class SeekerConn extends Component {
+    static navigationOptions = {
         title: 'Currently Connected',
 
     }
-    
-    constructor(props){
+
+    constructor(props) {
         super(props)
         this.state = {
-            uidlist:[]
+            uidlist: []
         }
     }
 
     SearchConnections = uid => {
         uid = Fire.shared.uid
 
-        var ref2 = firebase.database().ref(uid+ '/PreviouslyConnected/');
-        ref2.once('value', function(snapshot) {
+        var ref2 = firebase.database().ref(uid + '/PreviouslyConnected/');
+        ref2.once('value', function (snapshot) {
             try {
-              
-              // alert(uid)
-            
-            snapshot.forEach(function (childSnapshot) {
-      
-              var value = childSnapshot.val();
-              console.log(value)
-              if(value.Key){
-                var present= false
-  
-                temp.state.uidlist.forEach(element => {
-                  if(element.key==value.Key)
-                  {
-                    present = true
-                  }
-                })
-      
-                if(!present)
-                {
-                  var joined = temp.state.uidlist.concat({key:value.Key});
-                  // alert(key)
-                  temp.setState({
-                    uidlist: joined,
-                  });
-                }
-      
-                
-              }
-              else{
-                alert("lol")
-              }
-              
-            });
-          } catch (error) {
-              alert(error)
-          }
-          });
-    
-        var ref = firebase.database().ref(uid+ '/CurrentlyConnected/');
-        const temp = this
-        ref.on('value', function(snapshot) {
-          try {
-            
-            // alert(uid)
-          
-          snapshot.forEach(function (childSnapshot) {
-    
-            var value = childSnapshot.val();
-            console.log(value)
-            if(value.uid){
-              var present= false
 
-              temp.state.uidlist.forEach(element => {
-                if(element.key==value.uid)
-                {
-                  present = true
-                }
-              })
-    
-              if(!present)
-              {
-                var joined = temp.state.uidlist.concat({key:value.uid});
-                // alert(key)
-                temp.setState({
-                  uidlist: joined,
+                // alert(uid)
+
+                snapshot.forEach(function (childSnapshot) {
+
+                    var value = childSnapshot.val();
+                    console.log(value)
+                    if (value.Key) {
+                        var present = false
+
+                        temp.state.uidlist.forEach(element => {
+                            if (element.key == value.Key) {
+                                present = true
+                            }
+                        })
+
+                        if (!present) {
+                            var joined = temp.state.uidlist.concat({ key: value.Key });
+                            // alert(key)
+                            temp.setState({
+                                uidlist: joined,
+                            });
+                        }
+
+
+                    }
+                    else {
+                        alert("lol")
+                    }
+
                 });
-              }
-    
-              
+            } catch (error) {
+                alert(error)
             }
-            else{
-              alert("lol")
-            }
-            
-          });
-        } catch (error) {
-            alert(error)
-        }
         });
 
-        
+        var ref = firebase.database().ref(uid + '/CurrentlyConnected/');
+        const temp = this
+        ref.on('value', function (snapshot) {
+            try {
+
+                // alert(uid)
+
+                snapshot.forEach(function (childSnapshot) {
+
+                    var value = childSnapshot.val();
+                    console.log(value)
+                    if (value.uid) {
+                        var present = false
+
+                        temp.state.uidlist.forEach(element => {
+                            if (element.key == value.uid) {
+                                present = true
+                            }
+                        })
+
+                        if (!present) {
+                            var joined = temp.state.uidlist.concat({ key: value.uid });
+                            // alert(key)
+                            temp.setState({
+                                uidlist: joined,
+                            });
+                        }
+
+
+                    }
+                    else {
+                        alert("lol")
+                    }
+
+                });
+            } catch (error) {
+                alert(error)
+            }
+        });
+
+
     }
 
-      componentDidMount() {
+    componentDidMount() {
         var uid = Fire.shared.uid
         var temp = this
-        if(!uid){
-            setTimeout(function(){ temp.SearchConnections(uid)},2000)
-        }else{
-          this.SearchConnections(uid)
+        if (!uid) {
+            setTimeout(function () { temp.SearchConnections(uid) }, 2000)
+        } else {
+            this.SearchConnections(uid)
         }
     }
 
     componentWillUnmount() {
         var uid = Fire.shared.uid
-    
-        var ref = firebase.database().ref(uid+'/CurrentlyConnected/');
-    
+
+        var ref = firebase.database().ref(uid + '/CurrentlyConnected/');
+
         ref.off();
-      }
-    
+    }
+
     endchat = (Key) => {
-        
+
         /*BASIT CODE HERE*/
         var uid = Fire.shared.uid
         var ref1 = firebase.database().ref(Key + '/CurrentlyConnected/');
         const connect = {
-        uid
+            uid
         }
-        ref1.once('value', function(snapshot) {
+        ref1.once('value', function (snapshot) {
             snapshot.forEach(function (childSnapshot) {
 
                 var value = childSnapshot.val();
-                if(value.Key){
-                    if(value.Key == uid)
-                    {
+                if (value.Key) {
+                    if (value.Key == uid) {
 
                         var key1 = childSnapshot.key
                         ref1.child(key1).remove()
@@ -156,24 +151,23 @@ export default class SeekerConn extends Component{
                     }
 
                 }
-                else{
-                  alert("lol")
+                else {
+                    alert("lol")
                 }
 
-              });
-          });
+            });
+        });
         ref1 = firebase.database().ref(Key + '/PreviouslyConnected/');
         ref1.push(connect)
         ref1 = firebase.database().ref(Key + '/ToBeDeleted/');
         ref1.push(connect)
         var ref2 = firebase.database().ref(uid + '/CurrentlyConnected/');
-        ref2.once('value', function(snapshot) {
+        ref2.once('value', function (snapshot) {
             snapshot.forEach(function (childSnapshot) {
 
                 var value = childSnapshot.val();
-                if(value.uid){
-                    if(value.uid == Key)
-                    {
+                if (value.uid) {
+                    if (value.uid == Key) {
 
                         var key1 = childSnapshot.key
                         ref2.child(key1).remove()
@@ -181,22 +175,22 @@ export default class SeekerConn extends Component{
                     }
 
                 }
-                else{
-                  alert("lol")
+                else {
+                    alert("lol")
                 }
 
-              });
-          });
+            });
+        });
         const second = {
-        Key
+            Key
         }
         ref2 = firebase.database().ref(uid + '/PreviouslyConnected/');
         ref2.push(second)
     }
     render() {
         return (
-             <View style={styles.viewstyle}>
-                
+            <View style={styles.viewstyle}>
+
                 <TouchableOpacity
                     style={styles.button}
                     onPress={() => this.props.navigation.navigate('request')}>
@@ -211,11 +205,11 @@ export default class SeekerConn extends Component{
                             <FlatList data={this.state.uidlist}
                                 contentContainerStyle={styles.container}
 
-                                renderItem={({item, index}) => (
+                                renderItem={({ item, index }) => (
                                     <View>
-                                        <TouchableOpacity 
-                                        style={styles.button} 
-                                        onPress={() => this.props.navigation.navigate("Chatting", { uid: item.key })}
+                                        <TouchableOpacity
+                                            style={styles.button}
+                                            onPress={() => this.props.navigation.navigate("Chatting", { uid: item.key })}
                                             onLongPress={() => Alert.alert(
                                                 'End Chat Session',
                                                 'Would you like to end your chat session with the helper?',
@@ -243,35 +237,35 @@ export default class SeekerConn extends Component{
                     }
 
                 </View>
-             </View>
+            </View>
         );
     }
 }
 
 const styles = StyleSheet.create({
-  viewstyle: {
-    flex: 1,
-    backgroundColor: "#1a2942"
-  },
+    viewstyle: {
+        flex: 1,
+        backgroundColor: "#1a2942"
+    },
 
-  button: {
-    fontFamily: "Poppins",
-    alignItems: "center",
-    backgroundColor: "white",
-    padding: 10,
-    alignSelf: "stretch",
-    height: Dimensions.get("window").height / 15
-  },
+    button: {
+        fontFamily: "Poppins",
+        alignItems: "center",
+        backgroundColor: "white",
+        padding: 10,
+        alignSelf: "stretch",
+        height: Dimensions.get("window").height / 15
+    },
 
-  buttontext: {
-    fontFamily: "Poppins",
-    fontSize: 20,
-    color: "black"
-  },
+    buttontext: {
+        fontFamily: "Poppins",
+        fontSize: 20,
+        color: "black"
+    },
 
-  container: {
-    justifyContent: "space-evenly",
-    
+    container: {
+        justifyContent: "space-evenly",
+
     }
 });
 

@@ -21,28 +21,28 @@ export default class Awareness extends Component {
 
     logout = () => {
         const temp = this.props.navigation
-        firebase.auth().signOut().then(async function() {
+        firebase.auth().signOut().then(async function () {
             await AsyncStorage.removeItem('usertype');
             temp.navigate('Auth');
-          }).catch(function(error) {
+        }).catch(function (error) {
             // An error happened.
             alert(error)
-          });
+        });
     }
 
     render() {
         return (
             <View style={styles.viewstyle}>
 
-                <Header style={{ backgroundColor: '#1a2942'}}>
-                    <Left style = {{flex:0.1,}}>
-                    <Icon name= "menu" style={{color: 'white'}} onPress={() => this.props.navigation.openDrawer()}/>
+                <Header style={{ backgroundColor: '#1a2942' }}>
+                    <Left style={{ flex: 0.1, }}>
+                        <Icon name="menu" style={{ color: 'white' }} onPress={() => this.props.navigation.openDrawer()} />
                     </Left>
-                    <Body style = {{alignItems: 'flex-start'}}>
+                    <Body style={{ alignItems: 'flex-start' }}>
                         <Title>Home</Title>
                     </Body>
                 </Header>
-                
+
                 <View style={styles.HeaderStyle}>
                     <View style={styles.logostyle}>
                         <Text style={styles.textstyle}>Talk It Out</Text>
@@ -96,7 +96,7 @@ export default class Awareness extends Component {
                         </TouchableOpacity>
                     </View>
 
-                <TouchableOpacity onPress={async () => alert(await AsyncStorage.getItem('usertype'))}><Text style={{color: 'white'}}>Press</Text></TouchableOpacity>
+                    <TouchableOpacity onPress={async () => alert(await AsyncStorage.getItem('usertype'))}><Text style={{ color: 'white' }}>Press</Text></TouchableOpacity>
                 </View>
             </View>
         );
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
         alignSelf: "stretch",
         // width: Dimensions.get("window").width / 2.5,
         borderRadius: 10,
-        height: Dimensions.get("window").height/15
+        height: Dimensions.get("window").height / 15
 
     },
 
