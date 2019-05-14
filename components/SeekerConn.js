@@ -12,6 +12,7 @@ import {
 import * as firebase from "firebase";
 import 'firebase/firestore';
 import Fire from '../Fire.js';
+import RF from 'react-native-responsive-fontsize'
 
 
 export default class SeekerConn extends Component {
@@ -130,23 +131,39 @@ export default class SeekerConn extends Component {
         ref.off();
     }
 
+    onlongpress = (Key) => {
+        Alert.alert(
+            'End Chat Session',
+            'Would you like to end your chat session with the helper?',
+            [
+
+                {
+                    text: 'Cancel',
+                    onPress: () => console.log('Cancel Pressed'),
+                    style: 'cancel',
+                },
+                { text: 'OK', onPress: () => this.endchat(Key) },
+            ],
+            { cancelable: false },
+        )
+    }
+
     endchat = (Key) => {
 
-        /*BASIT CODE HERE*/
         var uid = Fire.shared.uid
-        var ref1 = firebase.database().ref(Key + '/CurrentlyConnected/');
+        var helperref = firebase.database().ref(Key + '/CurrentlyConnected/');
         const connect = {
             uid
         }
-        ref1.once('value', function (snapshot) {
+        helperref.once('value', function (snapshot) {
             snapshot.forEach(function (childSnapshot) {
 
                 var value = childSnapshot.val();
                 if (value.Key) {
                     if (value.Key == uid) {
-
+                        alert(value.Key)
                         var key1 = childSnapshot.key
-                        ref1.child(key1).remove()
+                        helperref.child(key1).remove()
 
                     }
 
@@ -157,12 +174,14 @@ export default class SeekerConn extends Component {
 
             });
         });
-        ref1 = firebase.database().ref(Key + '/PreviouslyConnected/');
-        ref1.push(connect)
-        ref1 = firebase.database().ref(Key + '/ToBeDeleted/');
-        ref1.push(connect)
-        var ref2 = firebase.database().ref(uid + '/CurrentlyConnected/');
-        ref2.once('value', function (snapshot) {
+        
+        helperref = firebase.database().ref(Key + '/PreviouslyConnected/');
+        helperref.push(connect)
+        helperref = firebase.database().ref(Key + '/ToBeDeleted/');
+        helperref.push(connect)
+        
+        var seekerref = firebase.database().ref(uid + '/CurrentlyConnected/');
+        seekerref.once('value', function (snapshot) {
             snapshot.forEach(function (childSnapshot) {
 
                 var value = childSnapshot.val();
@@ -170,7 +189,7 @@ export default class SeekerConn extends Component {
                     if (value.uid == Key) {
 
                         var key1 = childSnapshot.key
-                        ref2.child(key1).remove()
+                        seekerref.child(key1).remove()
 
                     }
 
@@ -184,8 +203,8 @@ export default class SeekerConn extends Component {
         const second = {
             Key
         }
-        ref2 = firebase.database().ref(uid + '/PreviouslyConnected/');
-        ref2.push(second)
+        seekerref = firebase.database().ref(uid + '/PreviouslyConnected/');
+        seekerref.push(second)
     }
     render() {
         return (
@@ -206,23 +225,12 @@ export default class SeekerConn extends Component {
                                 contentContainerStyle={styles.container}
 
                                 renderItem={({ item, index }) => (
-                                    <View>
+                                    <View style={{padding:10}}>
                                         <TouchableOpacity
                                             style={styles.button}
                                             onPress={() => this.props.navigation.navigate("Chatting", { uid: item.key })}
-                                            onLongPress={() => Alert.alert(
-                                                'End Chat Session',
-                                                'Would you like to end your chat session with the helper?',
-                                                [
-                                                    {
-                                                        text: 'Cancel',
-                                                        onPress: () => console.log('Cancel Pressed'),
-                                                        style: 'cancel',
-                                                    },
-                                                    { text: 'OK', onPress: () => this.endchat(item.key) },
-                                                ],
-                                                { cancelable: false },
-                                            )}>
+                                            onLongPress={() => this.onlongpress(item.key)}
+                                            >
                                             <Text style={styles.buttontext}> Helper {index + 1} </Text>
                                         </TouchableOpacity>
                                     </View>
@@ -232,7 +240,7 @@ export default class SeekerConn extends Component {
                             />
                             :
                             <View>
-                                <Text>No helper connected yet</Text>
+                                <Text style={{justifyContent: 'center', alignSelf:'center', color:'white', fontFamily: 'Poppins-Medium', fontSize: RF(4)}}>No helper connected yet</Text>
                             </View>
                     }
 
@@ -258,7 +266,7 @@ const styles = StyleSheet.create({
     },
 
     buttontext: {
-        fontFamily: "Poppins",
+        fontFamily: "Poppins-Medium",
         fontSize: 20,
         color: "black"
     },

@@ -8,11 +8,11 @@ import {
     TouchableOpacity,
     FlatList,
     AsyncStorage,
-    Alert
 } from 'react-native';
 import * as firebase from "firebase";
 import 'firebase/firestore';
 import Fire from '../Fire.js';
+import RF from "react-native-responsive-fontsize"
 
 
 export default class ConnectionHelper extends Component {
@@ -141,7 +141,7 @@ export default class ConnectionHelper extends Component {
                             />
                             :
                             <View>
-                                <Text>No seekers connected yet</Text>
+                                <Text style={{ justifyContent: 'center', alignSelf: 'center', color: 'white', fontFamily: 'Poppins-Medium', fontSize: RF(4) }}>No seeker connected yet</Text>
                             </View>
                     }
 
@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
     },
 
     button: {
-        fontFamily: "Poppins",
+        fontFamily: "Poppins-Medium",
         alignItems: "center",
         backgroundColor: "white",
         padding: 10,
@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
     },
 
     buttontext: {
-        fontFamily: "Poppins",
+        fontFamily: "Poppins-Medium",
         fontSize: 20,
         color: "black"
     },

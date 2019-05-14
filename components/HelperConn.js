@@ -148,15 +148,7 @@ export default class HelperConn extends Component {
     render() {
         return (
             <View style={styles.viewstyle}>
-                <View style={styles.HeaderStyle}>
-                    <View style={styles.logostyle}>
-                        <Text style={styles.textstyle}>Talk It Out </Text>
-                    </View>
-                    <View style={styles.Headermessage}>
-                        <Text style={styles.HMStyle}>Connection Screen</Text>
-                    </View>
 
-                </View>
                 <View style={{ flex: 1 }}>
                     {
 
@@ -167,7 +159,7 @@ export default class HelperConn extends Component {
                                 renderItem={({ item }) => (
                                     <View>
                                         <TouchableOpacity style={styles.button} onPress={() => this.SendId(item.key)}>
-                                            <Text style={styles.buttontext}> {item.key} </Text>
+                                            <Text style={styles.buttontext}>New Request: Tap on this button to Accept</Text>
                                         </TouchableOpacity>
                                     </View>
 
@@ -177,8 +169,7 @@ export default class HelperConn extends Component {
 
                             :
                             <View>
-                                <Text> NO Request </Text>
-
+                                <Text style={{ justifyContent: 'center', alignSelf: 'center', color: 'white', fontFamily: 'Poppins-Medium', fontSize: RF(4) }}> NO Request </Text>
                             </View>
 
 

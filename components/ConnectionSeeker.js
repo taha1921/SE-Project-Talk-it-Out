@@ -38,24 +38,33 @@ export default class ConnectionSeeker extends Component {
     }
 
     verify = () => {
-        const uid = Fire.shared.uid
-        var lol = "lol"
-        const req = {
-            "request": {
-                uid,
-            },
+        if(this.state.gender === "" || this.state.age === "")
+        {
+            alert("Please choose an option in gender and age")
+        }
+        else
+        {
+            const uid = Fire.shared.uid
+            var lol = "lol"
+            const req = {
+                "request": {
+                    uid,
+                },
 
-            
-        };
-        firebase.firestore().collection("Helpers").get().then(function(querySnapshot) {
 
-            querySnapshot.forEach(function(doc) {
-                
-                var ref = firebase.database().ref(doc.id+'/Requests/');
-                ref.push(req)
+            };
+            firebase.firestore().collection("Helpers").get().then(function (querySnapshot) {
 
+                querySnapshot.forEach(function (doc) {
+
+                    var ref = firebase.database().ref(doc.id + '/Requests/');
+                    ref.push(req)
+                });
             });
-        });
+            alert('Request Sent, We will connect you to a helper in some time')
+            
+        }
+
     }
     
     render() {
@@ -69,10 +78,13 @@ export default class ConnectionSeeker extends Component {
 
                 <View style={{paddingVertical: 20}}>
                     <Text style={{ alignSelf: 'center', color: '#158ec1', fontSize: RF(2.4), fontFamily: 'Poppins-Regular' }}>Choose Gender</Text>
+                    <Text style={{ alignSelf: 'center', color: '#158ec1', fontSize: RF(1.9), fontFamily: 'Poppins-Regular' }}>(Please open and tap No preference if you don't have a preference)</Text>
+                    
                     <Picker
                         selectedValue={this.state.gender}
                         onValueChange={(gender) => { this.setState({ gender: gender }) }}
                         style={styles.pickerstyle}>
+                        <Picker.Item label="..." value=""/>
                         <Picker.Item label="No preference" value="no preference"/>                        
                         <Picker.Item label="Female" value="female" />
                         <Picker.Item label="Male" value="male" />
@@ -82,10 +94,12 @@ export default class ConnectionSeeker extends Component {
                 
                 <View style={{ paddingVertical: 20}}>
                     <Text style={{ alignSelf: 'center', color: '#158ec1', fontSize: RF(2.4), fontFamily: 'Poppins-Regular' }}>Choose Age</Text>
+                    <Text style={{ alignSelf: 'center', color: '#158ec1', fontSize: RF(1.9), fontFamily: 'Poppins-Regular' }}>(Please open and tap No preference if you don't have a preference)</Text>                    
                     <Picker
                         selectedValue={this.state.age}
                         onValueChange={(age) => { this.setState({ age: age }) }}
                         style={styles.pickerstyle}>
+                        <Picker.Item label="..." value=""/>
                         <Picker.Item label="No preference" value="No preference" />
                         <Picker.Item label="18" value="18" />                        
                         <Picker.Item label="19" value="19" />
