@@ -38,7 +38,7 @@ export default class App extends React.Component {
                         <Icon name="menu" style={{ color: 'white' }} onPress={() => this.props.navigation.openDrawer()} />
                     </Left>
                     <Body style={{ alignItems: 'flex-start' }}>
-                        <Title>Counsellors and Therapists</Title>
+                        <Title>General Awareness</Title>
                     </Body>
                 </Header>
                 
