@@ -26,6 +26,7 @@ import ConnectionSeeker from "./components/ConnectionSeeker.js";
 import HelperConn from "./components/HelperConn.js";
 import ConnectionHelper from "./components/ConnectionHelper.js";
 import SeekerConn from "./components/SeekerConn.js";
+import Report from "./components/Report.js"
 import * as firebase from "firebase";
 
 
@@ -147,6 +148,10 @@ const seekerstack = createStackNavigator(
 
     Chatting: {
       screen: Chat
+    },
+
+    feedback : {
+      screen: Report
     }
   },
 

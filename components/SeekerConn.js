@@ -66,7 +66,7 @@ export default class SeekerConn extends Component {
 
                 });
             } catch (error) {
-                alert(error)
+               alert(error)
             }
         });
 
@@ -131,21 +131,102 @@ export default class SeekerConn extends Component {
         ref.off();
     }
 
-    onlongpress = (Key) => {
-        Alert.alert(
-            'End Chat Session',
-            'Would you like to end your chat session with the helper?',
-            [
+    startchat = (key) => {
+        /*Basit Code Here*/
+    }
 
-                {
-                    text: 'Cancel',
-                    onPress: () => console.log('Cancel Pressed'),
-                    style: 'cancel',
-                },
-                { text: 'OK', onPress: () => this.endchat(Key) },
-            ],
-            { cancelable: false },
-        )
+    reportuser = (key) => {
+        console.log('made it here')
+        this.props.navigation.navigate('feedback', {uid: key})
+    }
+
+    onlongpress = (Key) => {
+        var uid = Fire.shared.uid
+
+        var ref = firebase.database().ref(uid);
+
+        const temp = this
+
+        ref.on('value', function (snapshot) {
+            if(!snapshot.hasChild("CurrentlyConnected")) 
+            {
+                Alert.alert(
+                    'Not Connected',
+                    'You are currently not connected with this helper, what action would you like to take?',
+                    [
+                        {
+                            text: "Report User",
+                            onPress: () => temp.reportuser(Key)
+                        },
+                        
+                        {
+                            text: 'Cancel',
+                            style: 'cancel',
+                        },
+                        
+                        { text: 'Start Chat', 
+                        onPress: () => temp.startchat(Key)
+                        },
+                    ],
+                    { cancelable: false },
+                )
+            }
+            else 
+            {
+                var seekerref = firebase.database().ref(uid + '/CurrentlyConnected/');
+                seekerref.once('value', function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        var helperkey = childSnapshot.val()
+
+                        if(helperkey.uid == Key)
+                        {
+                            Alert.alert(
+                                'Currently Connected',
+                                'You are currently connected with this helper, what action would you like to take?',
+                                [
+                                    {
+                                        text: "Report User",
+                                        onPress: () => temp.reportuser(Key)
+                                    },
+
+                                    {
+                                        text: 'Cancel',
+                                        style: 'cancel',
+                                    },
+
+                                    {
+                                        text: 'End Chat',
+                                        onPress: () => temp.endchat(Key)
+                                    },
+                                ],
+                                { cancelable: false },
+                            )
+                        }
+                        else
+                        {
+                            Alert.alert(
+                                'Connected with another helper',
+                                'You are not currently connected with this helper, what action would you like to take?',
+                                [
+                                    {
+                                        text: 'Cancel',
+                                        style: 'cancel',
+                                    },
+
+                                    {
+                                        text: 'Report User',
+                                        onPress: () => temp.reportuser(Key)
+                                    },
+                                ],
+                                { cancelable: false },
+                            )
+                        }
+                    })
+                })
+            }
+        })
+
+
     }
 
     endchat = (Key) => {
@@ -161,7 +242,6 @@ export default class SeekerConn extends Component {
                 var value = childSnapshot.val();
                 if (value.Key) {
                     if (value.Key == uid) {
-                        alert(value.Key)
                         var key1 = childSnapshot.key
                         helperref.child(key1).remove()
 
