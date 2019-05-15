@@ -12,7 +12,7 @@ import {
 import "firebase/firestore";
 import StarRating from "react-native-star-rating";
 import RF from 'react-native-responsive-fontsize'
-// import CameraRollPicker from 'react-native-camera-roll-picker';
+import * as firebase from "firebase";
 
 
 export default class Report extends Component{
@@ -31,8 +31,47 @@ export default class Report extends Component{
     update = (val) => {
         this.setState({ stars: val })
     }
+
+    get uid() {
+        return this.props.navigation.state.params.uid
+    }
+
     TextUP = (val) => {
         this.setState({ text: val })
+        var ref = firebase.database().ref('/Reports/'+this.uid)
+        const rep = {
+            Average:this.state.stars,
+            Count:1,
+        }
+        var temp = this
+        var ratingRef = firebase.database().ref('/Reports/'+this.uid+'/Rating/')
+        ref.once('value', function (snapshot) {
+            if (!snapshot.hasChild("Rating")) {
+                ratingRef.set(rep)
+            }
+            else{
+                var value = snapshot.val()
+                var count = value.Rating.Count
+                var average = value.Rating.Average
+                var total = count*average
+                total = total +temp.state.stars
+                count = count + 1
+                average = total/count
+                var newrep = {
+                    Average: average,
+                    Count: count
+                }
+                ratingRef.set(newrep)
+            }
+        });
+
+        var report = {
+            "Rating": this.state.stars,
+            "Report":this.state.text
+        }
+        ref.push(report)
+        
+        
     }
     
     render() {

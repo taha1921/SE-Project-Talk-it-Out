@@ -72,7 +72,7 @@ export default class SeekerConn extends Component {
 
         var ref = firebase.database().ref(uid + '/CurrentlyConnected/');
         const temp = this
-        ref.on("child_added", function (snapshot) {
+        ref.on("value", function (snapshot) {
             try {
 
                 // alert(uid)
