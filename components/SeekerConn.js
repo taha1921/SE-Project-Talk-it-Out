@@ -185,11 +185,6 @@ export default class SeekerConn extends Component {
                                 'You are currently connected with this helper, what action would you like to take?',
                                 [
                                     {
-                                        text: "Report User",
-                                        onPress: () => temp.reportuser(Key)
-                                    },
-
-                                    {
                                         text: 'Cancel',
                                         style: 'cancel',
                                     },
