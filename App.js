@@ -27,8 +27,10 @@ import HelperConn from "./components/HelperConn.js";
 import ConnectionHelper from "./components/ConnectionHelper.js";
 import SeekerConn from "./components/SeekerConn.js";
 import Report from "./components/Report.js"
-import * as firebase from "firebase";
+import ModLogin from "./components/ModLogin.js";
+import ModHelperConn from "./components/ModHelperConn";
 
+import * as firebase from "firebase";
 
 const AuthStack = createStackNavigator(
   {
@@ -205,6 +207,35 @@ const HelperStack = createDrawerNavigator(
   }
 );
 
+const ModeratorStack = createStackNavigator(
+  {
+    choice: {
+      screen: ModLogin
+    },
+
+    helpermod: {
+      screen: ModHelperConn
+    },
+
+    chat: {
+      screen: Chat
+    }
+  },
+
+  {
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: "#1a2942"
+      },
+      headerTintColor: "#929eb2",
+      headerTitleStyle: {
+        fontWeight: "normal"
+      }
+    }
+  }
+
+)
+
 const SeekerStack = createDrawerNavigator(
   {
     Home: {
@@ -247,6 +278,7 @@ export default createAppContainer(createSwitchNavigator(
     AuthLoading: AuthLoadingScreen,
     Helper: HelperStack,
     Seeker: SeekerStack,
+    Moderator: ModeratorStack,
     Auth: AuthStack,
   },
   {

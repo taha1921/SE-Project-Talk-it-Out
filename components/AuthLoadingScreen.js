@@ -27,6 +27,10 @@ export default class AuthLoadingScreen extends Component {
             {
                 this.props.navigation.navigate("Seeker")
             }
+            else if(type == "Moderator")
+            {
+                this.props.navigation.navigate("Moderator")
+            }
         }
         else
         {

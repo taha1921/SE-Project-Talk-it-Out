@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import RF from "react-native-responsive-fontsize";
 
-export default class LoginHelper extends Component {
+export default class LoginModerator extends Component {
   
   static navigationOptions = {
     title: 'Moderator Login',
@@ -220,4 +220,4 @@ const styles = StyleSheet.create({
 
 });
 
-AppRegistry.registerComponent("HelperEmail", () => HelperEmail)
+AppRegistry.registerComponent("LoginModerator", () => LoginModerator);
