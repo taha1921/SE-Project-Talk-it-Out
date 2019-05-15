@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { AppRegistry, AsyncStorage } from 'react-native'
+import { AppRegistry, AsyncStorage, Platform } from 'react-native'
 import { GiftedChat } from 'react-native-gifted-chat'; // 0.3.0
 import * as firebase from "firebase";
-
 import Fire from '../Fire.js';
 
 export default class Chat extends Component {

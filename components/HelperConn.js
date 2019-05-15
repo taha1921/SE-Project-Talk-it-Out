@@ -18,7 +18,6 @@ import { ScrollView, FlatList } from 'react-native-gesture-handler';
 import Fire from '../Fire.js';
 
 
-
 export default class HelperConn extends Component {
 
     static navigationOptions = {
@@ -79,7 +78,7 @@ export default class HelperConn extends Component {
 
 
 
-        this.props.navigation.state.params.onGoBack({ key: Key })
+        // this.props.navigation.state.params.onGoBack({ key: Key })
         this.props.navigation.goBack()
     }
 

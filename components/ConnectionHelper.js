@@ -116,7 +116,7 @@ export default class ConnectionHelper extends Component {
             <View style={styles.viewstyle}>
                 <TouchableOpacity
                     style={styles.button}
-                    onPress={() => this.props.navigation.navigate('connection', { onGoBack: (key) => this.refresh(key), })}>
+                    onPress={() => this.props.navigation.navigate('connection')}>
                     <Text style={styles.buttontext}>See Pending Requests</Text>
                 </TouchableOpacity>
                 <View style={{ padding: 20 }}></View>

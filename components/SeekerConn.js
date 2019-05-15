@@ -147,7 +147,7 @@ export default class SeekerConn extends Component {
 
         const temp = this
 
-        ref.on('value', function (snapshot) {
+        ref.once('value', function (snapshot) {
             if(!snapshot.hasChild("CurrentlyConnected")) 
             {
                 Alert.alert(
@@ -239,7 +239,7 @@ export default class SeekerConn extends Component {
                     if (value.Key == uid) {
                         var key1 = childSnapshot.key
                         helperref.child(key1).remove()
-
+                        alert("Chat ended, You can long Press on the header if you want to report the helper or start another chat session")
                     }
 
                 }
