@@ -66,13 +66,13 @@ export default class ConnectionHelper extends Component {
                         var present = false
 
                         temp.state.uidlist.forEach(element => {
-                            if (element.key == value.Key) {
+                            if (element.key == value.uid) {
                                 present = true
                             }
                         })
 
                         if (!present) {
-                            var joined = temp.state.uidlist.concat({ key: value.Key });
+                            var joined = temp.state.uidlist.concat({ key: value.uid });
                             // alert(key)
                             temp.setState({
                                 uidlist: joined,

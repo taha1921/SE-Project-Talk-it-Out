@@ -66,13 +66,13 @@ export default class HelperConn extends Component {
         var uid = Fire.shared.uid
         var ref = firebase.database().ref(Key + '/CurrentlyConnected/');
         const connect = {
-            uid
+            "uid": uid
         }
 
         ref.push(connect)
         ref = firebase.database().ref(uid + '/CurrentlyConnected/');
         const second = {
-            Key
+            "uid": Key
         }
         ref.push(second)
 

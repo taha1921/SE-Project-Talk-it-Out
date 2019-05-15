@@ -12,6 +12,8 @@ import {
 import "firebase/firestore";
 import StarRating from "react-native-star-rating";
 import RF from 'react-native-responsive-fontsize'
+// import CameraRollPicker from 'react-native-camera-roll-picker';
+
 
 export default class Report extends Component{
     static navigationOptions = {

@@ -41,17 +41,17 @@ export default class SeekerConn extends Component {
 
                     var value = childSnapshot.val();
                     console.log(value)
-                    if (value.Key) {
+                    if (value.uid) {
                         var present = false
 
                         temp.state.uidlist.forEach(element => {
-                            if (element.key == value.Key) {
+                            if (element.key == value.uid) {
                                 present = true
                             }
                         })
 
                         if (!present) {
-                            var joined = temp.state.uidlist.concat({ key: value.Key });
+                            var joined = temp.state.uidlist.concat({ key: value.uid });
                             // alert(key)
                             temp.setState({
                                 uidlist: joined,
@@ -72,7 +72,7 @@ export default class SeekerConn extends Component {
 
         var ref = firebase.database().ref(uid + '/CurrentlyConnected/');
         const temp = this
-        ref.on('value', function (snapshot) {
+        ref.on("child_added", function (snapshot) {
             try {
 
                 // alert(uid)
@@ -132,7 +132,21 @@ export default class SeekerConn extends Component {
     }
 
     startchat = (key) => {
+
         /*Basit Code Here*/
+
+        var uid = Fire.shared.uid
+        var ref = firebase.database().ref(uid + '/CurrentlyConnected/');
+        const connect = {
+            "uid":key
+        }
+
+        ref.push(connect)
+        ref = firebase.database().ref(key + '/CurrentlyConnected/');
+        const second = {
+            "uid":uid
+        }
+        ref.push(second)
     }
 
     reportuser = (key) => {
@@ -235,8 +249,8 @@ export default class SeekerConn extends Component {
             snapshot.forEach(function (childSnapshot) {
 
                 var value = childSnapshot.val();
-                if (value.Key) {
-                    if (value.Key == uid) {
+                if (value.uid) {
+                    if (value.uid == uid) {
                         var key1 = childSnapshot.key
                         helperref.child(key1).remove()
                         alert("Chat ended, You can long Press on the header if you want to report the helper or start another chat session")
@@ -250,10 +264,10 @@ export default class SeekerConn extends Component {
             });
         });
         
-        helperref = firebase.database().ref(Key + '/PreviouslyConnected/');
-        helperref.push(connect)
-        helperref = firebase.database().ref(Key + '/ToBeDeleted/');
-        helperref.push(connect)
+        var helperref1 = firebase.database().ref(Key + '/PreviouslyConnected/');
+        helperref1.push(connect)
+        var helperref2 = firebase.database().ref(Key + '/ToBeDeleted/');
+        helperref2.push(connect)
         
         var seekerref = firebase.database().ref(uid + '/CurrentlyConnected/');
         seekerref.once('value', function (snapshot) {
@@ -276,10 +290,10 @@ export default class SeekerConn extends Component {
             });
         });
         const second = {
-            Key
+            "uid":Key
         }
-        seekerref = firebase.database().ref(uid + '/PreviouslyConnected/');
-        seekerref.push(second)
+        var seekerref1 = firebase.database().ref(uid + '/PreviouslyConnected/');
+        seekerref1.push(second)
     }
     render() {
         return (
