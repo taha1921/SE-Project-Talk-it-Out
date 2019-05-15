@@ -15,7 +15,7 @@ import RF from "react-native-responsive-fontsize";
 import * as firebase from "firebase";
 import "firebase/firestore";
 
-export default class LoginHelper extends Component {
+export default class LoginSeeker extends Component {
   
   static navigationOptions = {
     title: 'Seeker Login',
@@ -285,4 +285,4 @@ const styles = StyleSheet.create({
 
 });
 
-AppRegistry.registerComponent("HelperEmail", () => HelperEmail)
+AppRegistry.registerComponent("LoginSeeker", () => LoginSeeker);

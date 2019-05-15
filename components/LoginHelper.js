@@ -283,4 +283,4 @@ const styles = StyleSheet.create({
 
 });
 
-AppRegistry.registerComponent("HelperEmail", () => HelperEmail)
+AppRegistry.registerComponent("LoginHelper", () => LoginHelper)

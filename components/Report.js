@@ -37,8 +37,8 @@ export default class Report extends Component{
         return (
             <ScrollView contentContainerStyle={styles.viewstyle}>
 
-                    <View style={styles.Headermessage}>
-                        <Text style={styles.HMStyle}>Feedback</Text>
+                    <View style={styles.Header}>
+                        <Text style={styles.HM}>Feedback</Text>
                     </View>
 
                 <View style={{ justifyContent: "center", paddingTop: 50 }} >
@@ -83,7 +83,7 @@ export default class Report extends Component{
     }
 }
 
-styles = StyleSheet.create({
+const styles = StyleSheet.create({
     button: {
         alignItems: "center",
         backgroundColor: "#244882",
@@ -107,19 +107,17 @@ styles = StyleSheet.create({
         color: "white"
     },
 
-    Headermessage: {
+    Header: {
         justifyContent: "center",
         alignItems: "center",
         paddingTop: 5,
         paddingBottom: 10
     },
 
-    HMStyle: {
+    HM: {
         fontFamily: "Poppins-Bold",
         fontSize: RF(4.5),
         color: "#158ec1",
-        // alignItems: "center",
-
     },
 
     HMStyle2: {
@@ -136,41 +134,6 @@ styles = StyleSheet.create({
         backgroundColor: "#1a2942"
     },
 
-    scrollstyle: {
-        flex: 1,
-        flexDirection: "column",
-        justifyContent: "space-evenly"
-        // backgroundColor: 'red'
-    },
-
-    inputlayout: {
-        justifyContent: "center",
-        padding: 20
-    },
-
-    datelayout: {
-        justifyContent: "center",
-        padding: 20,
-        alignItems: "center"
-    },
-
-    input: {
-        height: 40,
-        backgroundColor: "rgba(255,255,255,0.2)",
-        width: Dimensions.get("window").width / 1.4,
-        alignSelf: "center",
-        color: "white",
-        paddingHorizontal: 10,
-        borderRadius: 20
-    },
-
-    pickerstyle: {
-        backgroundColor: "rgba(255,255,255,0.2)",
-        width: Dimensions.get("window").width / 1.4,
-        alignSelf: 'center',
-        color: "rgba(255,255,255,0.5)",
-        borderRadius: 20
-    }
 });
 
 AppRegistry.registerComponent("Report", () => Report)

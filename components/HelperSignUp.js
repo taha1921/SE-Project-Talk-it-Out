@@ -358,7 +358,7 @@ export default class HelperSignUp extends Component {
     }
 }
 
-styles = StyleSheet.create({
+const styles = StyleSheet.create({
   button: {
     alignItems: "center",
     backgroundColor: "#244882",
@@ -448,4 +448,4 @@ styles = StyleSheet.create({
   }
 });
 
-AppRegistry.registerComponent("HelperEmail", () => HelperEmail);
+AppRegistry.registerComponent("HelperSignUp", () => HelperSignUp);
