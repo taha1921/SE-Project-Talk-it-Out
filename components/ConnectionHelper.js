@@ -62,7 +62,7 @@ export default class ConnectionHelper extends Component {
 
                     var value = childSnapshot.val();
                     console.log(value)
-                    if (value.Key) {
+                    if (value.uid) {
                         var present = false
 
                         temp.state.uidlist.forEach(element => {

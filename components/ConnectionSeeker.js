@@ -59,7 +59,7 @@ export default class ConnectionSeeker extends Component {
                 querySnapshot.forEach(function (doc) {
                     var comp = 0
                     var data = doc.data()
-                    var pref = doc.Preferences
+                    var pref = data.Preferences
                     if(temp.state.depression)
                     {
                         if(pref.includes("Depression"))
@@ -106,7 +106,7 @@ export default class ConnectionSeeker extends Component {
                     Helpers.push(helper)
                     
                 });
-                Helpers.sort(function(a, b){return b-a});
+                Helpers.sort(function(a, b){return b.comp-a.comp});
                 console.log(Helpers)
                 for (let i = 0; i < 5; i++) {
                     var ref = firebase.database().ref(Helpers[i].id + '/Requests/');
