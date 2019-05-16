@@ -18,7 +18,7 @@ import Fire from '../Fire.js';
 export default class ConnectionSeeker extends Component {
 
     static navigationOptions = {
-        title: 'Chat',
+        title: 'Connect to a helper',
     }
     
 
@@ -52,8 +52,13 @@ export default class ConnectionSeeker extends Component {
             var lol = "lol"
             const req = {
                 "request": {
+<<<<<<< HEAD
                     "uid" :uid,
                     "time" :this.timestamp
+=======
+                    "uid": uid,
+                    "time": this.timestamp
+>>>>>>> c6c8618b80797c175578778a7caa499133510da4
                 },
 
 
@@ -65,10 +70,15 @@ export default class ConnectionSeeker extends Component {
                     var comp = 0
                     var data = doc.data()
                     var pref = data.Preferences
+<<<<<<< HEAD
                     if(temp.state.depression)
                     {
                         if(pref.includes("Depression"))
                         {
+=======
+                    if (temp.state.depression) {
+                        if (pref.includes("Depression")) {
+>>>>>>> c6c8618b80797c175578778a7caa499133510da4
                             comp = comp + 1
                         }
                     }
@@ -111,7 +121,11 @@ export default class ConnectionSeeker extends Component {
                     Helpers.push(helper)
                     
                 });
+<<<<<<< HEAD
                 Helpers.sort(function(a, b){return b.comp-a.comp});
+=======
+                Helpers.sort(function (a, b) { return b.comp - a.comp });
+>>>>>>> c6c8618b80797c175578778a7caa499133510da4
                 console.log(Helpers)
                 for (let i = 0; i < 5; i++) {
                     var ref = firebase.database().ref(Helpers[i].id + '/Requests/');
@@ -120,6 +134,20 @@ export default class ConnectionSeeker extends Component {
                 }
                 
             });
+<<<<<<< HEAD
+=======
+
+            firebase.firestore().collection("Moderator").get().then(function (querySnapshot) {
+                querySnapshot.forEach(function (doc) {
+                    var ref1 = firebase.database().ref(doc.id + '/Requests/');
+                    ref1.push(req)
+
+                })
+
+            })
+
+            alert('Request Sent, We will connect you to a helper in some time')
+>>>>>>> c6c8618b80797c175578778a7caa499133510da4
 
             firebase.firestore().collection("Moderator").get().then(function (querySnapshot) {
                 querySnapshot.forEach(function (doc) {

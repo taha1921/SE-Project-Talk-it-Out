@@ -14,7 +14,11 @@ import 'firebase/firestore';
 import Fire from '../Fire.js';
 import RF from 'react-native-responsive-fontsize'
 
+<<<<<<< HEAD
 export default class ModHelperConn extends Component{
+=======
+export default class ModHelperConn extends Component {
+>>>>>>> c6c8618b80797c175578778a7caa499133510da4
     static navigationOptions = {
         title: 'Moderator as Seeker',
     }
@@ -30,12 +34,21 @@ export default class ModHelperConn extends Component{
 
         };
     }
+<<<<<<< HEAD
     
     SendId = (key) =>{
         var uid = Fire.shared.uid
         var ref = firebase.database().ref(uid + '/CurrentlyConnectedHelper/');
         const connect = {
             "uid":key
+=======
+
+    SendId = (key) => {
+        var uid = Fire.shared.uid
+        var ref = firebase.database().ref(uid + '/CurrentlyConnectedHelper/');
+        const connect = {
+            "uid": key
+>>>>>>> c6c8618b80797c175578778a7caa499133510da4
         }
 
         ref.once('value', function (snapshot) {
@@ -48,7 +61,11 @@ export default class ModHelperConn extends Component{
                     var value = childSnapshot.val();
                     console.log(value)
                     if (value.uid) {
+<<<<<<< HEAD
                         if(value.uid==key){
+=======
+                        if (value.uid == key) {
+>>>>>>> c6c8618b80797c175578778a7caa499133510da4
                             present = true
                         }
                     }
@@ -57,8 +74,12 @@ export default class ModHelperConn extends Component{
                     }
 
                 });
+<<<<<<< HEAD
                 if(!present)
                 {
+=======
+                if (!present) {
+>>>>>>> c6c8618b80797c175578778a7caa499133510da4
                     ref.push(connect)
                 }
             } catch (error) {
@@ -68,7 +89,11 @@ export default class ModHelperConn extends Component{
 
         var ref1 = firebase.database().ref(key + '/CurrentlyConnected/');
         const second = {
+<<<<<<< HEAD
             "uid":uid
+=======
+            "uid": uid
+>>>>>>> c6c8618b80797c175578778a7caa499133510da4
         }
         ref1.once('value', function (snapshot) {
             try {
@@ -80,9 +105,15 @@ export default class ModHelperConn extends Component{
                     var value = childSnapshot.val();
                     console.log(value)
                     if (value.uid) {
+<<<<<<< HEAD
                         if(value.uid==uid){
                             present = true
                         }  
+=======
+                        if (value.uid == uid) {
+                            present = true
+                        }
+>>>>>>> c6c8618b80797c175578778a7caa499133510da4
 
                     }
                     else {
@@ -90,8 +121,12 @@ export default class ModHelperConn extends Component{
                     }
 
                 });
+<<<<<<< HEAD
                 if(!present)
                 {
+=======
+                if (!present) {
+>>>>>>> c6c8618b80797c175578778a7caa499133510da4
                     ref1.push(second)
                 }
             } catch (error) {
@@ -100,7 +135,11 @@ export default class ModHelperConn extends Component{
         });
 
         this.props.navigation.navigate("chat", { uid: key })
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> c6c8618b80797c175578778a7caa499133510da4
 
     }
 
@@ -115,7 +154,11 @@ export default class ModHelperConn extends Component{
     }
     SearchConnections = uid => {
         uid = Fire.shared.uid
+<<<<<<< HEAD
         var temp =  this
+=======
+        var temp = this
+>>>>>>> c6c8618b80797c175578778a7caa499133510da4
         firebase.firestore().collection("Helpers").get().then(function (querySnapshot) {
             querySnapshot.forEach(function (doc) {
                 var joined = temp.state.ListOfReq.concat({ key: doc.id });
@@ -126,11 +169,16 @@ export default class ModHelperConn extends Component{
         })
     }
 
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> c6c8618b80797c175578778a7caa499133510da4
     render() {
         return (
             <View style={styles.viewstyle}>
 
+<<<<<<< HEAD
             <View style={{ flex: 1 }}>
                 {
 
@@ -156,10 +204,41 @@ export default class ModHelperConn extends Component{
 
 
                 }
+=======
+                <View style={{ flex: 1 }}>
+                    {
+
+                        this.state.ListOfReq.length > 0 ?
+                            <FlatList data={this.state.ListOfReq}
+                                contentContainerStyle={styles.container}
+
+                                renderItem={({ item }) => (
+                                    <View style={{ paddingBottom: 10 }}>
+                                        <TouchableOpacity style={styles.button} onPress={() => this.SendId(item.key)}>
+                                            <Text style={styles.buttontext} > {item.key} </Text>
+                                        </TouchableOpacity>
+                                    </View>
 
 
+                                )}
+                            />
+
+                            :
+                            <View>
+                                <Text style={{ justifyContent: 'center', alignSelf: 'center', color: 'white', fontFamily: 'Poppins-Medium', fontSize: RF(4) }}> NO Request </Text>
+                            </View>
+>>>>>>> c6c8618b80797c175578778a7caa499133510da4
+
+
+                    }
+
+
+                </View>
             </View>
+<<<<<<< HEAD
         </View>
+=======
+>>>>>>> c6c8618b80797c175578778a7caa499133510da4
             // <View style={styles.viewstyle}>
 
             //         <View style={styles.Header}>
@@ -169,7 +248,11 @@ export default class ModHelperConn extends Component{
             //     <View style={{ justifyContent: "center", paddingTop: 50 }} >
             //         <Text style={styles.HMStyle2}>Enter Helper ID</Text>
 
+<<<<<<< HEAD
                    
+=======
+
+>>>>>>> c6c8618b80797c175578778a7caa499133510da4
             //         <TextInput
             //             style={{backgroundColor: "white"}}
             //             maxHeight={Dimensions.get('window').height/2}
@@ -237,7 +320,7 @@ const styles = StyleSheet.create({
     },
 
     viewstyle: {
-        flex : 1,
+        flex: 1,
         flexDirection: "column",
         justifyContent: "flex-start",
         backgroundColor: "#1a2942"

@@ -66,6 +66,8 @@ export default class SeekerSignUp extends Component {
               
               }
             });
+          }).catch(err => {
+            alert(err)
           })
 
         }
