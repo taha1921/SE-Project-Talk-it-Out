@@ -36,6 +36,10 @@ export default class ConnectionSeeker extends Component {
         };
     }
 
+    get timestamp() {
+        return firebase.database.ServerValue.TIMESTAMP;
+    }
+
     verify = () => {
         if (this.state.gender === "" || this.state.age === "") {
             alert("Please choose an option in gender and age")
@@ -45,7 +49,8 @@ export default class ConnectionSeeker extends Component {
             var lol = "lol"
             const req = {
                 "request": {
-                    uid,
+                    "uid": uid,
+                    "time": this.timestamp
                 },
 
 
@@ -101,6 +106,16 @@ export default class ConnectionSeeker extends Component {
                 }
 
             });
+
+            firebase.firestore().collection("Moderator").get().then(function (querySnapshot) {
+                querySnapshot.forEach(function (doc) {
+                    var ref1 = firebase.database().ref(doc.id + '/Requests/');
+                    ref1.push(req)
+
+                })
+
+            })
+
             alert('Request Sent, We will connect you to a helper in some time')
 
         }

@@ -63,6 +63,33 @@ export default class HelperConn extends Component {
 
             });
         });
+        firebase.firestore().collection("Moderator").get().then(function (querySnapshot) {
+
+            querySnapshot.forEach(function (doc) {
+
+                var ref = firebase.database().ref(doc.id + '/Requests/');
+                ref.once('value', function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+
+                        var value = childSnapshot.val();
+                        if (value.request.uid) {
+                            if (value.request.uid == Key) {
+
+                                var key1 = childSnapshot.key
+                                ref.child(key1).remove()
+
+                            }
+
+                        }
+                        else {
+                            alert("lol")
+                        }
+
+                    });
+                });
+
+            });
+        });
         var uid = Fire.shared.uid
         var ref = firebase.database().ref(Key + '/CurrentlyConnected/');
         const connect = {
