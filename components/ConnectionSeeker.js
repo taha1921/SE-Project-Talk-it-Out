@@ -18,7 +18,7 @@ import Fire from '../Fire.js';
 export default class ConnectionSeeker extends Component {
 
     static navigationOptions = {
-        title: 'Chat',
+        title: 'Connect to a helper',
     }
 
 
@@ -56,7 +56,7 @@ export default class ConnectionSeeker extends Component {
                 querySnapshot.forEach(function (doc) {
                     var comp = 0
                     var data = doc.data()
-                    var pref = doc.Preferences
+                    var pref = data.Preferences
                     if (temp.state.depression) {
                         if (pref.includes("Depression")) {
                             comp = comp + 1
@@ -92,7 +92,7 @@ export default class ConnectionSeeker extends Component {
                     Helpers.push(helper)
 
                 });
-                Helpers.sort(function (a, b) { return b - a });
+                Helpers.sort(function (a, b) { return b.comp - a.comp });
                 console.log(Helpers)
                 for (let i = 0; i < 5; i++) {
                     var ref = firebase.database().ref(Helpers[i].id + '/Requests/');

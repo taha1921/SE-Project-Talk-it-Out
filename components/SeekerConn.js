@@ -80,7 +80,7 @@ export default class SeekerConn extends Component {
                 snapshot.forEach(function (childSnapshot) {
 
                     var value = childSnapshot.val();
-                    console.log(value)
+
                     if (value.uid) {
                         var present = false
 
