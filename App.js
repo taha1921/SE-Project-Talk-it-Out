@@ -28,7 +28,9 @@ import ConnectionHelper from "./components/ConnectionHelper.js";
 import SeekerConn from "./components/SeekerConn.js";
 import Report from "./components/Report.js"
 import ModLogin from "./components/ModLogin.js";
-import ModHelperConn from "./components/ModHelperConn";
+import ModHelperConn from "./components/ModHelperConn.js";
+import ModSeekerConn from "./components/ModSeekerConn.js";
+import ConnectionMod from "./components/ConnectionMod";
 
 import * as firebase from "firebase";
 
@@ -93,7 +95,7 @@ const CustomDrawer = (props) => (
     </View>
     <ScrollView>
       <DrawerItems {...props} />
-      <Button title="Logout" onPress = {
+      <Button title="Logout" onPress={
         () => {
           const temp = props.navigation
           firebase.auth().signOut().then(async function () {
@@ -152,7 +154,7 @@ const seekerstack = createStackNavigator(
       screen: Chat
     },
 
-    feedback : {
+    feedback: {
       screen: Report
     }
   },
@@ -215,6 +217,12 @@ const ModeratorStack = createStackNavigator(
 
     helpermod: {
       screen: ModHelperConn
+    },
+    seekermod: {
+      screen: ModSeekerConn
+    },
+    connMod: {
+      screen: ConnectionMod
     },
 
     chat: {

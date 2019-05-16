@@ -71,7 +71,8 @@ export default class Report extends Component{
         }
         ref.push(report)
         
-        
+        alert("Review submitted")
+        this.props.navigation.goBack()
     }
     
     render() {

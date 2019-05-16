@@ -116,7 +116,7 @@ export default class ConnectionHelper extends Component {
             <View style={styles.viewstyle}>
                 <TouchableOpacity
                     style={styles.button}
-                    onPress={() => this.props.navigation.navigate('seekermod')}>
+                    onPress={() => this.props.navigation.navigate('connection')}>
                     <Text style={styles.buttontext}>See Pending Requests</Text>
                 </TouchableOpacity>
                 <View style={{ padding: 20 }}></View>
@@ -130,7 +130,7 @@ export default class ConnectionHelper extends Component {
                                     <View style={{ padding: 10 }}>
                                         <TouchableOpacity
                                             style={styles.button}
-                                            onPress={() => this.props.navigation.navigate("chat", { uid: item.key })}
+                                            onPress={() => this.props.navigation.navigate("Chatting", { uid: item.key })}
                                         >
                                             <Text style={styles.buttontext}> Seeker {index + 1} </Text>
                                         </TouchableOpacity>
