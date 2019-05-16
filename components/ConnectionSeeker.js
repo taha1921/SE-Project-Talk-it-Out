@@ -53,13 +53,67 @@ export default class ConnectionSeeker extends Component {
 
 
             };
+            var temp = this
             firebase.firestore().collection("Helpers").get().then(function (querySnapshot) {
-
+                var Helpers = []
                 querySnapshot.forEach(function (doc) {
-
-                    var ref = firebase.database().ref(doc.id + '/Requests/');
-                    ref.push(req)
+                    var comp = 0
+                    var data = doc.data()
+                    var pref = doc.Preferences
+                    if(temp.state.depression)
+                    {
+                        if(pref.includes("Depression"))
+                        {
+                            comp = comp + 1
+                        }
+                    }
+                    if(temp.state.comfort)
+                    {
+                        if(pref.includes("Comfort"))
+                        {
+                            comp = comp + 1
+                        }
+                    }
+                    if(temp.state.anxiety)
+                    {
+                        if(pref.includes("Anxiety"))
+                        {
+                            comp = comp + 1
+                        }
+                    }
+                    if(temp.state.loneliness)
+                    {
+                        if(pref.includes("Loneliness"))
+                        {
+                            comp = comp + 1
+                        }
+                    }
+                    if(temp.state.abuse)
+                    {
+                        if(pref.includes("Abuse"))
+                        {
+                            comp = comp + 1
+                        }
+                    }
+                    if(data.Gender==temp.state.gender)
+                    {
+                        comp = comp + 2
+                    }
+                    var helper = {
+                        "id":doc.id,
+                        "comp":comp
+                    }
+                    Helpers.push(helper)
+                    
                 });
+                Helpers.sort(function(a, b){return b-a});
+                console.log(Helpers)
+                for (let i = 0; i < 5; i++) {
+                    var ref = firebase.database().ref(Helpers[i].id + '/Requests/');
+                    ref.push(req)
+                    
+                }
+                
             });
             alert('Request Sent, We will connect you to a helper in some time')
             
