@@ -158,6 +158,8 @@ export default class HelperSignUp extends Component {
                 }
                 });
 
+            }).catch(err => {
+                alert(err)
             })
         }
         }
