@@ -5,9 +5,12 @@ import {
     Text,
     View,
     TouchableOpacity,
-    Dimensions
+    Dimensions,
+    AsyncStorage,
 } from 'react-native';
 import RF from "react-native-responsive-fontsize";
+import * as firebase from "firebase";
+
 
 
 
@@ -34,7 +37,7 @@ export default class ModLogin extends Component {
               
                  <View>
                     <TouchableOpacity style={styles.button}
-                    onPress={() => this.props.navigation.navigate('')}>
+                    onPress={() => this.props.navigation.navigate('helpermod')}>
                         <Text style={styles.buttontext}>Seeker</Text> 
                         
                     </TouchableOpacity>
@@ -42,9 +45,28 @@ export default class ModLogin extends Component {
               
                 <View>
                     <TouchableOpacity style={styles.button}
-                    onPress={() => this.props.navigation.navigate('')}
+                    onPress={() => this.props.navigation.navigate('connMod')}
                     >
                         <Text style={styles.buttontext}>Helper</Text>
+                    </TouchableOpacity>
+                </View>
+
+                <View>
+                    <TouchableOpacity style={styles.button}
+                    onPress = {
+                      () => {
+                        const temp = this.props.navigation
+                        firebase.auth().signOut().then(async function () {
+                          await AsyncStorage.removeItem('usertype');
+                          temp.navigate('Auth');
+                        }).catch(function (error) {
+                          // An error happened.
+                          alert(error)
+                        });
+                      }
+                    }
+                    >
+                        <Text style={styles.buttontext}>LogOut </Text>
                     </TouchableOpacity>
                 </View>
                 

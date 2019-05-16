@@ -15,10 +15,10 @@ import Fire from '../Fire.js';
 import RF from "react-native-responsive-fontsize"
 
 
-export default class ConnectionHelper extends Component {
+export default class ConnectionMod extends Component {
 
     static navigationOptions = {
-        title: 'Currently Connected Seekers',
+        title: 'Currently Connected',
     }
 
     constructor(props) {
@@ -51,7 +51,7 @@ export default class ConnectionHelper extends Component {
             });
         });
 
-        var ref = firebase.database().ref(uid + '/CurrentlyConnected/');
+        var ref = firebase.database().ref(uid + '/CurrentlyConnectedSeeker/');
         const temp = this
         ref.on('value', function (snapshot) {
             try {
@@ -105,7 +105,7 @@ export default class ConnectionHelper extends Component {
     componentWillUnmount() {
         var uid = Fire.shared.uid
 
-        var ref = firebase.database().ref(uid + '/CurrentlyConnected/');
+        var ref = firebase.database().ref(uid + '/CurrentlyConnectedSeeker/');
 
         ref.off();
     }
@@ -179,4 +179,4 @@ const styles = StyleSheet.create({
     }
 })
 
-AppRegistry.registerComponent("ConnectionHelper", () => ConnectionHelper);
+AppRegistry.registerComponent("ConnectionMod", () => ConnectionMod);

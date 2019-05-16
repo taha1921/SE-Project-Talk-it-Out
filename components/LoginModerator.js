@@ -8,9 +8,12 @@ import {
     TouchableOpacity,
     Dimensions,
     TextInput,
-    KeyboardAvoidingView
+    KeyboardAvoidingView,
+    AsyncStorage
 } from 'react-native';
 import RF from "react-native-responsive-fontsize";
+import * as firebase from "firebase";
+import "firebase/firestore";
 
 export default class LoginModerator extends Component {
   
@@ -50,13 +53,45 @@ export default class LoginModerator extends Component {
      }
      else
      {
-      alert(this.state.password)
       this.setState({loader:true, ButtonState: true})
+      firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).catch(function (error) {
+        alert(error.message);
+      });
+
+    }
+     
+}
+componentDidMount() {
+ var email = this.state.email;
+ const nav = this.props.navigation;
+  global.unsubscribe = firebase.auth().onAuthStateChanged(function (user) {
+
+    if (user) {
+     
+      AsyncStorage.setItem('usertype', "Moderator", () => {
+        AsyncStorage.setItem('useremail', email, () => {
+          AsyncStorage.setItem('uid',user.uid, ()=>{
+             nav.navigate('Moderator')
+
+          })
+          // unsubscribe();
+        })
+      })
+     }
+  })
+
+   
+
+       
      
 
-     }
-      
+  
 }
+
+componentWillUnmount() {
+ global.unsubscribe()
+}
+
 
     render() {
         return (
